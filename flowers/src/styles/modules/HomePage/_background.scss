@@ -1,0 +1,46 @@
+.firstHeading {
+    height: 60px;
+    width: auto;
+    color: white;
+    text-align: center;
+    font-size: 34px;
+    font-weight: bold;
+}
+
+.secondHeading {
+    height: 40px;
+    width: auto;
+    color: white;
+    text-align: center;
+    font-size: 20px;
+    font-weight: lighter;
+}
+
+.searchBox {
+    display: flex;
+    align-items: center;
+    margin-top: 20px;
+    width: 470px;
+    background-color: white;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.searchBox input {
+    flex: 1;
+    padding: 10px;
+    border: none;
+    outline: none;
+}
+
+.searchButton,
+.startButton {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+.searchButton img {
+    width: 20px;
+    height: 20px;
+}

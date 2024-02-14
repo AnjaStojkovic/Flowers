@@ -1,10 +1,7 @@
-import { StringifyOptions } from 'querystring';
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import * as yup from 'yup';
 import UserService from '../../services/UserService';
-import { useNavigate } from 'react-router-dom';
-import { text } from 'stream/consumers';
 import Button from '../buttons/Button';
 import EmailPasswordInput from '../userData/EmailPasswordInput';
 
@@ -45,9 +42,6 @@ const CreateAccount = () => {
 
   const onSubmit = async (data: FormData) => { 
     try {
-     // await schema.validate(data);
-      console.log('Valid data:', data);
-      
      create(data);
     } catch (error) {
       console.error('Validation error:', error);
@@ -66,7 +60,7 @@ const CreateAccount = () => {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      <h2 className='createAccountHeading'>Create Account</h2>
+      <h2 className='formHeading'>Create Account</h2>
       <div>
         <label>
           <input

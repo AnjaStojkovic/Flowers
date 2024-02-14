@@ -18,11 +18,16 @@ const customStyles = {
     marginRight: '-50%',
     transform: 'translate(-50%, -50%)',
   },
+  overlay: {
+    backgroundColor: 'rgba(0, 0, 0, 0.5)', // Dodaje poluprozirnu crnu pozadinu
+  },
 };
 
 const Layout: React.FC<LayoutProps> = ({ children}) => {
 
   const [modalIsOpen, setIsOpen] = React.useState(false);
+  const [popupType, setPopupType] = React.useState<'login' | 'createAccount'>('login'); 
+
 
   const openModal =() => {
     setIsOpen(true);
@@ -31,6 +36,16 @@ const Layout: React.FC<LayoutProps> = ({ children}) => {
    const closeModal = () => {
     setIsOpen(false);
   }
+
+  const openLoginPopup = () => {
+    setPopupType('login'); 
+    setIsOpen(true);
+  };
+  
+  const openCreateAccountPopup = () => {
+    setPopupType('createAccount'); 
+    setIsOpen(true);
+  }
   return (
     <div className="layoutContainer">
       <div className="layoutContainer__leftSide">
@@ -38,9 +53,9 @@ const Layout: React.FC<LayoutProps> = ({ children}) => {
         <span>FlowerSport</span>
       </div>
       <div className="layoutContainer__rightSide">
-        <Link name='Flowers' style="layoutContainer__rightSide__link" /> <Link name='Login' style="layoutContainer__rightSide__link layoutContainer__rightSide__link--loginLink" />
-        <button onClick={() => setIsOpen(true)} className="bayoutContainer__rightSide__link layoutContainer__rightSide__link--loginLink"></button>
-        <button onClick={() => setIsOpen(true)} className="btn-modal">
+        <Link name='Flowers' style="layoutContainer__rightSide__link" /> 
+        <button onClick={openLoginPopup} className="bayoutContainer__rightSide__link layoutContainer__rightSide__link--loginLink">Login</button>
+        <button onClick={openCreateAccountPopup} className="btn-modal">
           New Account
         </button>
       </div>
@@ -51,9 +66,9 @@ const Layout: React.FC<LayoutProps> = ({ children}) => {
         style={customStyles}
       > 
       <Popup 
-       isOpen={modalIsOpen}
-        onRequestClose={closeModal}/>
-      
+        isOpen={modalIsOpen}
+        onRequestClose={closeModal}
+        popupType={popupType}/>
       </Modal>
 
       {children} 

@@ -1,10 +1,14 @@
+import { useState } from "react";
 import Background from "./Background";
-//import SearchItem from "./components/SearchItem";
+import FlowersList from "./FlowersList";
 
 const Homepage = () => {
+
+    const isOpen = true; 
     return (
         <div className="homepageContainer">
             <Background />
+            <FlowersList />
         </div>
     )
 }

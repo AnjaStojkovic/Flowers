@@ -17,18 +17,6 @@ const Navigation: React.FC = () => {
 
   return (
     <RouterProvider router={routes} />
-    // const router = createBrowserRouter([
-    //   {
-    //     path: "/",
-    //     element: <HomePage />,
-    //     children: [
-    //       {
-    //         path: "contact",
-    //         element: < />,
-    //       },
-    //     ],
-    //   },
-    // ]);
   );
 }
 

@@ -1,0 +1,25 @@
+.layoutContainer {
+    background-color: white;
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+
+    &__leftSide {
+        display: flex;
+        gap: 8px;
+        color: rgb(255, 72, 0);
+    }
+
+    &__rightSide {
+        display: flex;
+        gap: 20px;
+
+        &__link {
+            color: grey;
+
+            &--loginLink {
+                color: rgb(255, 72, 0);
+            }
+        }
+    }
+}

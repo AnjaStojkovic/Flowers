@@ -1,0 +1,11 @@
+.imagesList {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around; 
+    gap: 20px; 
+}
+
+.card {
+    width: calc(25% - 20px); 
+    margin-bottom: 20px; 
+}

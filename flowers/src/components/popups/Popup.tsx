@@ -1,20 +1,22 @@
 import React, { useState } from "react";
 import CreateAccount from "../forms/CreateAccount";
 import Login from "../forms/Login";
+import { useDispatch } from "react-redux";
 
 interface PopupProps {
   isOpen: boolean;
-  onRequestClose: () => void;
-  popupType: "login" | "createAccount";
+  // onRequestClose: () => void;
+  type: "login" | "createAccount";
 }
 
-const Popup: React.FC<PopupProps> = ({ isOpen, onRequestClose, popupType }) => {
+const Popup: React.FC<PopupProps> = ({ isOpen, type }) => {
+  const dispatch = useDispatch();
   return (
     <>
       {isOpen && (
         <div className="popup">
-          {popupType === "login" && <Login />}
-          {popupType === "createAccount" && <CreateAccount />}
+          {type === "login" && <Login />}
+          {type === "createAccount" && <CreateAccount />}
         </div>
       )}
     </>

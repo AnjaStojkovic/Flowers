@@ -4,7 +4,7 @@ import * as yup from "yup";
 import UserService from "../../services/UserService";
 
 import Button from "../buttons/Button";
-import EmailPasswordInput from "../userData/Input";
+import Input from "../userData/Input";
 
 interface FormData {
   email: any;
@@ -35,7 +35,7 @@ const Login = () => {
       <h2 className="formHeading">Welcome Back</h2>
       <div>
         <label>
-          <EmailPasswordInput
+          <Input
             type="email"
             placeholder="Email Address"
             register={register("email")}
@@ -44,7 +44,7 @@ const Login = () => {
       </div>
       <div>
         <label>
-          <EmailPasswordInput
+          <Input
             type="password"
             placeholder="Password"
             register={register("password")}

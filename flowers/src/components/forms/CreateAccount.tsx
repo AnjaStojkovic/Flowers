@@ -14,7 +14,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 //   dateOfBirth: T;
 // }
 
-interface IFormData {
+export interface FormData {
   first_name: string;
   last_name: string;
   email: string;
@@ -31,11 +31,11 @@ const schema = yup.object().shape({
 });
 
 const CreateAccount = () => {
-  const { register, handleSubmit } = useForm<IFormData>({
+  const { register, handleSubmit } = useForm<FormData>({
     resolver: yupResolver(schema),
   });
 
-  const onSubmit = async (data: IFormData) => {
+  const onSubmit = async (data: FormData) => {
     try {
       await schema.validate(data);
       create(data);
@@ -44,7 +44,7 @@ const CreateAccount = () => {
     }
   };
 
-  const create = (formData: IFormData) => {
+  const create = (formData: FormData) => {
     UserService.createAccount(formData)
       .then(() => {
         alert("Successfully added");

@@ -1,7 +1,8 @@
 import axios, { AxiosResponse } from "axios";
+import { FormData } from "../components/forms/CreateAccount";
 
 const UserService = {
-  createAccount: (formData: IFormData) => {
+  createAccount: (formData: FormData) => {
     const url = "https://flowrspot-api.herokuapp.com//api/v1/users/register";
     return axios
       .post(url, formData)

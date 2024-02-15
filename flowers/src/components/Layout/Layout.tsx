@@ -4,6 +4,9 @@ import { Link } from "../Link/Link";
 import Modal from "react-modal";
 import Popup from "../popups/Popup";
 import Login from "../forms/Login";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "../../store/store";
+import { closePopup, openPopup } from "../../store/popup-slice";
 
 interface LayoutProps {
   children?: ReactNode;
@@ -24,28 +27,30 @@ const customStyles = {
 };
 
 const Layout: React.FC<LayoutProps> = ({ children }) => {
-  const [modalIsOpen, setIsOpen] = React.useState(false);
-  const [popupType, setPopupType] = React.useState<"login" | "createAccount">(
-    "login"
-  );
+  const { isOpen, type } = useSelector((state: RootState) => state.popup);
+  const dispatch = useDispatch();
 
-  const openModal = () => {
-    setIsOpen(true);
-  };
+  // const [modalIsOpen, setIsOpen] = React.useState(false);
+  // const [popupType, setPopupType] = React.useState<"login" | "createAccount">(
+  //   "login"
+  // );
+
+  // const openModal = () => {
+  //   setIsOpen(true);
+  // };
 
   const closeModal = () => {
-    setIsOpen(false);
+    dispatch(closePopup());
   };
 
   const openLoginPopup = () => {
-    setPopupType("login");
-    setIsOpen(true);
+    dispatch(openPopup("login"));
   };
 
   const openCreateAccountPopup = () => {
-    setPopupType("createAccount");
-    setIsOpen(true);
+    dispatch(openPopup("createAccount"));
   };
+
   return (
     <div className="layoutContainer">
       <div className="layoutContainer__leftSide">
@@ -65,16 +70,8 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
         </button>
       </div>
 
-      <Modal
-        isOpen={modalIsOpen}
-        onRequestClose={closeModal}
-        style={customStyles}
-      >
-        <Popup
-          isOpen={modalIsOpen}
-          onRequestClose={closeModal}
-          popupType={popupType}
-        />
+      <Modal isOpen={isOpen} onRequestClose={closeModal} style={customStyles}>
+        <Popup isOpen={isOpen} type={type} />
       </Modal>
 
       {children}

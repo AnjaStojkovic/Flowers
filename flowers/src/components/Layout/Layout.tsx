@@ -30,15 +30,6 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
   const { isOpen, type } = useSelector((state: RootState) => state.popup);
   const dispatch = useDispatch();
 
-  // const [modalIsOpen, setIsOpen] = React.useState(false);
-  // const [popupType, setPopupType] = React.useState<"login" | "createAccount">(
-  //   "login"
-  // );
-
-  // const openModal = () => {
-  //   setIsOpen(true);
-  // };
-
   const closeModal = () => {
     dispatch(closePopup());
   };
@@ -49,6 +40,10 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
 
   const openCreateAccountPopup = () => {
     dispatch(openPopup("createAccount"));
+  };
+
+  const openUserInfoPopup = () => {
+    dispatch(openPopup("userInfo"));
   };
 
   return (
@@ -67,6 +62,12 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
         </button>
         <button onClick={openCreateAccountPopup} className="btn-modal">
           New Account
+        </button>
+        <button
+          onClick={openUserInfoPopup}
+          className="bayoutContainer__rightSide__link layoutContainer__rightSide__link--loginLink"
+        >
+          Username
         </button>
       </div>
 

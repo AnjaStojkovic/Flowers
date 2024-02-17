@@ -1,19 +1,18 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
-import Layout from './components/Layout/Layout';
-import { Navigate } from 'react-router-dom';
-import Navigation from './routing/Navigation';
+import "./App.css";
+import Layout from "./components/Layout/Layout";
+import Navigation from "./routing/Navigation";
+import { Provider } from "react-redux";
+import { store } from "./store/store";
 
 const App: React.FC = () => {
   return (
     <>
-    <Layout >
-      
-    </Layout>
-    <Navigation />
+      <Provider store={store}>
+        <Layout />
+        <Navigation />
+      </Provider>
     </>
   );
-}
+};
 
 export default App;

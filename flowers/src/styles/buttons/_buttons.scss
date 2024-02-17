@@ -1,0 +1,20 @@
+.layoutButton {
+    color: white;
+    background-color: rgb(255, 72, 0);
+    border-radius: 20px;
+    padding: 2px 10px;
+}
+
+.submit-button {
+    padding: 10px 20px;
+    background-color: rgb(255, 72, 0);
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100%;
+  
+    &:hover {
+      background-color: rgb(255, 151, 14);
+    }
+  }

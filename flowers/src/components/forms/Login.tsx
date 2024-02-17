@@ -1,30 +1,29 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
-import UserService from "../../services/UserService";
-
+import { login } from "../../services/Auth";
 import Button from "../buttons/Button";
 import Input from "../userData/Input";
 
 interface FormData {
-  email: any;
-  password: any;
+  email: string;
+  password: string;
 }
 
-// const schema = yup.object().shape({
-//   email: yup.string().email().required(),
-//   password: yup.string().min(6).required(),
-// });
+const schema = yup.object().shape({
+  email: yup.string().email().required(),
+  password: yup.string().min(6).required(),
+});
 
 const Login = () => {
   const { register, handleSubmit } = useForm<FormData>();
 
   const onSubmit = async (data: FormData) => {
     try {
-      // await schema.validate(data);
+      await schema.validate(data);
       console.log("Valid data:", data);
 
-      //login(data);
+      login(data);
     } catch (error) {
       console.error("Validation error:", error);
     }

@@ -5,7 +5,6 @@ import { useDispatch } from "react-redux";
 
 interface PopupProps {
   isOpen: boolean;
-  // onRequestClose: () => void;
   type: "login" | "createAccount";
 }
 

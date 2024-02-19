@@ -9,6 +9,8 @@ import {
 import Homepage from "../modules/HomePage/Homepage";
 import NotFound from "../modules/NotFound";
 import FlowerDetails from "../modules/FlowerDetails/FlowerDetails";
+import CardList from "../modules/UserFlowers/CardList";
+import FavoritesList from "../modules/Favorites/FavoritesList";
 
 const Navigation: React.FC = () => {
   const routes = createBrowserRouter([
@@ -20,6 +22,14 @@ const Navigation: React.FC = () => {
     {
       path: "/details/:flowerId",
       element: <FlowerDetails />,
+    },
+    {
+      path: "/cards",
+      element: <CardList />,
+    },
+    {
+      path: "/favorites",
+      element: <FavoritesList />,
     },
   ]);
 

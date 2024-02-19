@@ -4,22 +4,62 @@ import * as jwt_decode from "jwt-decode";
 import { jwtDecode } from "jwt-decode";
 
 var Axios = axios.create({
-  baseURL: process.env.REACT_APP_BASE_URL,
+  baseURL: "https://flowrspot-api.herokuapp.com",
+  headers: {},
 });
+
+// Axios.interceptors.request.use(
+//   async function success(config) {
+//     console.log("Interceptor for requests called");
+//     const jwt = localStorage.getItem("jwt");
+//     console.log(jwt);
+//     if (jwt) {
+//       const decoded = jwtDecode(jwt);
+//       console.log("decoded token:", decoded);
+//       console.log(Date.now());
+//       if (decoded.exp && decoded.exp * 1000 < Date.now()) {
+//         // const test1 = new Date(decoded.exp);
+//         // const test2 = Date.now();
+//         // console.log(test1, "exp");
+//         // console.log(test2, "new date");
+//         alert("Jwt has expired");
+//         // await logout();
+//         // return Promise.reject(new Error("JWT expired"));
+//       }
+//       config.headers["Authorization"] = "Bearer " + jwt;
+//       config.headers["Content-Type"] = "application/json";
+//     }
+//     return config;
+//   },
+//   function error(error) {
+//     return Promise.reject(error);
+//   }
+// );
 
 Axios.interceptors.request.use(
   async function success(config) {
-    const jwt = window.localStorage["jwt"];
+    console.log("Interceptor for requests called");
+    const jwt = localStorage.getItem("jwt");
+    console.log(jwt);
     if (jwt) {
       const decoded = jwtDecode(jwt);
-      console.log(Date.now());
-      if (decoded.exp && decoded.exp < Date.now()) {
-        alert("Jwt has expired");
-        await logout();
-        return Promise.reject(new Error("JWT expired"));
+      if (decoded.exp && decoded.exp * 1000 < Date.now()) {
+        console.log("Token has expired. Refreshing token...");
+        try {
+          const refreshedToken = await refreshAccessToken();
+          console.log("Refreshed token:", refreshedToken);
+          config.headers["Authorization"] = "Bearer " + refreshedToken;
+          config.headers["Content-Type"] = "application/json";
+        } catch (refreshError) {
+          console.error("Error refreshing token:", refreshError);
+          await logout();
+          return Promise.reject(refreshError);
+        }
+        console.log("Token has expired");
+      } else {
+        config.headers["Authorization"] = "Bearer " + jwt;
+        config.headers["Content-Type"] = "application/json";
       }
-      config.headers["Authorization"] = "Bearer " + jwt;
-      config.headers["Content-Type"] = "application/json";
     }
     return config;
   },
@@ -28,12 +68,25 @@ Axios.interceptors.request.use(
   }
 );
 
+async function refreshAccessToken() {
+  try {
+    const response = await axios.post(
+      "https://flowrspot-api.herokuapp.com/api/v1/users/me/refresh"
+    );
+    const refreshedToken = response.data.auth_token;
+    localStorage.setItem("jwt", refreshedToken);
+    return refreshedToken;
+  } catch (error) {
+    throw new Error("Failed to refresh token");
+  }
+}
+
 Axios.interceptors.response.use(
   function success(response) {
     return response;
   },
   function failure(error) {
-    let jwt = window.localStorage["jwt"];
+    let jwt = localStorage["jwt"];
     if (jwt) {
       if (error.response && error.response.status == 403) {
         logout();

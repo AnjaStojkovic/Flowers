@@ -1,4 +1,7 @@
-import axios, { AxiosResponse } from "axios";
+//import axios, { AxiosResponse } from "axios";
+import { AxiosResponse } from "axios";
+import axios from "../axios/Axios";
+
 import { FormData } from "../components/forms/CreateAccount";
 
 const UserService = {
@@ -11,6 +14,19 @@ const UserService = {
       })
       .catch((error: Error) => {
         alert("An error occurred while adding the user");
+        throw error;
+      });
+  },
+
+  getUserInfo: (userId: any) => {
+    const url = "https://flowrspot-api.herokuapp.com/api/v1/users/me";
+    return axios
+      .get(url)
+      .then((res: AxiosResponse) => {
+        return res.data;
+      })
+      .catch((error: Error) => {
+        alert("An error occurred while loading information about the user");
         throw error;
       });
   },

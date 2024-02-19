@@ -32,7 +32,7 @@ const FlowersList: React.FC = () => {
     <div className="imagesList">
       {flowersData.map((flower) => (
         <Card
-          key={flower.id}
+          id={flower.id}
           name={flower.name}
           description={flower.latin_name}
           sightings={flower.sightings}

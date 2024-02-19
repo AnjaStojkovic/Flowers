@@ -4,6 +4,8 @@ import * as yup from "yup";
 import { login } from "../../services/Auth";
 import Button from "../buttons/Button";
 import Input from "../userData/Input";
+import { useDispatch, useSelector } from "react-redux";
+import { setUserId } from "../../store/user-slice";
 
 interface FormData {
   email: string;
@@ -17,13 +19,17 @@ const schema = yup.object().shape({
 
 const Login = () => {
   const { register, handleSubmit } = useForm<FormData>();
+  const dispatch = useDispatch();
 
   const onSubmit = async (data: FormData) => {
     try {
       await schema.validate(data);
       console.log("Valid data:", data);
 
-      login(data);
+      const userId = await login(data);
+      if (userId) {
+        dispatch(setUserId(userId));
+      }
     } catch (error) {
       console.error("Validation error:", error);
     }

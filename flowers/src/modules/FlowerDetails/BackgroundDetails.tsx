@@ -1,7 +1,7 @@
 import star from "../../assets/images/star-circle.svg";
 import flower from "../../assets/images/pink-flower.png";
 
-interface BackgroundDetailsProps {
+interface FlowerDetailsProps {
   id: number;
   name: string;
   latin_name: string;
@@ -12,7 +12,7 @@ interface BackgroundDetailsProps {
   description: string;
 }
 
-const BackgroundDetails: React.FC<BackgroundDetailsProps> = ({
+const BackgroundDetails: React.FC<FlowerDetailsProps> = ({
   id,
   name,
   latin_name,
@@ -34,6 +34,7 @@ const BackgroundDetails: React.FC<BackgroundDetailsProps> = ({
         <button className="add-sighting">+Add New Sighting</button>
       </div>
       <img className="flower" src={flower} alt="flower" />
+      {/* <img className="flower" src={profile_picture} alt="flower" /> */}
     </div>
   );
 };

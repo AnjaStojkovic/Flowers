@@ -22,7 +22,7 @@ const customStyles = {
     transform: "translate(-50%, -50%)",
   },
   overlay: {
-    backgroundColor: "rgba(0, 0, 0, 0.5)", // Dodaje poluprozirnu crnu pozadinu
+    backgroundColor: "rgba(0, 0, 0, 0.5)",
   },
 };
 
@@ -53,7 +53,21 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
         <span>FlowerSport</span>
       </div>
       <div className="layoutContainer__rightSide">
-        <Link name="Flowers" style="layoutContainer__rightSide__link" />
+        <Link
+          name="Flowers"
+          style="layoutContainer__rightSide__link"
+          route="/"
+        />
+        <Link
+          name="Latest sightings"
+          style="layoutContainer__rightSide__link"
+          route="/cards"
+        />
+        <Link
+          name="Favorites"
+          style="layoutContainer__rightSide__link"
+          route="/favorites"
+        />
         <button
           onClick={openLoginPopup}
           className="bayoutContainer__rightSide__link layoutContainer__rightSide__link--loginLink"

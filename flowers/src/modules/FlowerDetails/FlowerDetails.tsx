@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import BackgroundDetails from "./BackgroundDetails";
 import FlowerInfo from "./FlowerInfo";
 import FlowersService from "../../services/FlowersService";
-import { number } from "yup";
 import { useParams } from "react-router-dom";
 
 interface Flower {
@@ -37,18 +36,20 @@ const FlowerDetails: React.FC = () => {
   return (
     <>
       {flowerData && (
-        <BackgroundDetails
-          id={flowerData.id}
-          name={flowerData.name}
-          latin_name={flowerData.latin_name}
-          sightings={flowerData.sightings}
-          profile_picture={flowerData.profile_picture}
-          favorite={flowerData.favorite}
-          features={flowerData.features}
-          description={flowerData.description}
-        />
+        <>
+          <BackgroundDetails
+            id={flowerData.id}
+            name={flowerData.name}
+            latin_name={flowerData.latin_name}
+            sightings={flowerData.sightings}
+            profile_picture={flowerData.profile_picture}
+            favorite={flowerData.favorite}
+            features={flowerData.features}
+            description={flowerData.description}
+          />
+          <FlowerInfo description={flowerData.description} />
+        </>
       )}
-      <FlowerInfo />
     </>
   );
 };

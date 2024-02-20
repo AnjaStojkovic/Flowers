@@ -67,3 +67,17 @@
       background-color: rgb(255, 151, 14);
     }
   }
+
+  .button-modal {
+    background-color: rgb(255, 72, 0);
+    color: #fff;
+    border: none;
+    border-radius: 80px;
+    cursor: pointer;
+    width: 140px;
+    height: 35px;
+  
+    &:hover {
+      background-color: rgb(255, 151, 14);
+    }
+  }

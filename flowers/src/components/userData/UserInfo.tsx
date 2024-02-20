@@ -4,6 +4,7 @@ import UserInfoItem from "./UserInfoItem";
 import { closePopup } from "../../store/popup-slice";
 import { useEffect, useState } from "react";
 import UserService from "../../services/UserService";
+import { logout } from "../../services/Auth";
 
 interface User {
   id: number;
@@ -51,7 +52,9 @@ const UserInfo = () => {
         <UserInfoItem label="Last Name" value={userData?.last_name ?? ""} />
         <UserInfoItem label="Date of birth" value="May 20, 1989" />
         <UserInfoItem label="Email adress" value="john@gmail.com" />
-        <button className="info-details__logout">Logout</button>
+        <button onClick={logout} className="info-details__logout">
+          Logout
+        </button>
       </div>
     </>
   );

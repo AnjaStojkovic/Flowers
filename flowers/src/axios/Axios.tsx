@@ -8,34 +8,6 @@ var Axios = axios.create({
   headers: {},
 });
 
-// Axios.interceptors.request.use(
-//   async function success(config) {
-//     console.log("Interceptor for requests called");
-//     const jwt = localStorage.getItem("jwt");
-//     console.log(jwt);
-//     if (jwt) {
-//       const decoded = jwtDecode(jwt);
-//       console.log("decoded token:", decoded);
-//       console.log(Date.now());
-//       if (decoded.exp && decoded.exp * 1000 < Date.now()) {
-//         // const test1 = new Date(decoded.exp);
-//         // const test2 = Date.now();
-//         // console.log(test1, "exp");
-//         // console.log(test2, "new date");
-//         alert("Jwt has expired");
-//         // await logout();
-//         // return Promise.reject(new Error("JWT expired"));
-//       }
-//       config.headers["Authorization"] = "Bearer " + jwt;
-//       config.headers["Content-Type"] = "application/json";
-//     }
-//     return config;
-//   },
-//   function error(error) {
-//     return Promise.reject(error);
-//   }
-// );
-
 Axios.interceptors.request.use(
   async function success(config) {
     console.log("Interceptor for requests called");

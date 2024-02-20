@@ -7,6 +7,7 @@ import Login from "../forms/Login";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../store/store";
 import { closePopup, openPopup } from "../../store/popup-slice";
+import { isAuthenticated } from "../../services/Auth";
 
 interface LayoutProps {
   children?: ReactNode;
@@ -68,21 +69,26 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
           style="layoutContainer__rightSide__link"
           route="/favorites"
         />
-        <button
-          onClick={openLoginPopup}
-          className="bayoutContainer__rightSide__link layoutContainer__rightSide__link--loginLink"
-        >
-          Login
-        </button>
-        <button onClick={openCreateAccountPopup} className="btn-modal">
-          New Account
-        </button>
-        <button
-          onClick={openUserInfoPopup}
-          className="bayoutContainer__rightSide__link layoutContainer__rightSide__link--loginLink"
-        >
-          Username
-        </button>
+        {isAuthenticated() ? (
+          <button
+            onClick={openUserInfoPopup}
+            className="bayoutContainer__rightSide__link layoutContainer__rightSide__link--loginLink"
+          >
+            Username
+          </button>
+        ) : (
+          <div className="layoutContainer__rightSide__login">
+            <button
+              onClick={openLoginPopup}
+              className="bayoutContainer__rightSide__link layoutContainer__rightSide__link--loginLink"
+            >
+              Login
+            </button>
+            <button onClick={openCreateAccountPopup} className="button-modal">
+              New Account
+            </button>
+          </div>
+        )}
       </div>
 
       <Modal isOpen={isOpen} onRequestClose={closeModal} style={customStyles}>

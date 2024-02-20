@@ -15,12 +15,15 @@ const Favorite: React.FC<FavoriteProps> = ({
   profilePicture,
 }) => {
   return (
-    <div className="card">
-      <Link to="/" style={{ backgroundImage: `url(${profilePicture})` }}>
-        <h1 className="card__heading">{name}</h1>
-        <p className="card__description">{latinName}</p>
-        <p className="card__sightings">Sightings: {sightings}</p>
-      </Link>
+    <div
+      className="card2"
+      style={{ backgroundImage: `url(${profilePicture})` }}
+    >
+      <div>
+        <h1 className="card2__heading">{name}</h1>
+        <p className="card2__description">{latinName}</p>
+        <p className="card2__sightings">Sightings: {sightings}</p>
+      </div>
     </div>
   );
 };

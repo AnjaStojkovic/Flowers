@@ -1,4 +1,5 @@
 import axios, { AxiosResponse } from "axios";
+import { getAuthToken } from "./Auth";
 
 const FlowersService = {
   getFlowers: () => {
@@ -14,10 +15,15 @@ const FlowersService = {
       });
   },
 
-  getFavorites: (userId: any) => {
-    const url = "https://flowrspot-api.herokuapp.com/api/v1/flowers/favorites";
+  getFavorites: (userId: any, page: number) => {
+    const url = `https://flowrspot-api.herokuapp.com/api/v1/flowers/favorites?page=${page}`;
+    const authToken = getAuthToken();
     return axios
-      .get(url)
+      .get(url, {
+        headers: {
+          Authorization: authToken,
+        },
+      })
       .then((res: AxiosResponse) => {
         return res.data;
       })

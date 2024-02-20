@@ -17,9 +17,9 @@ const UserInfo = () => {
   const dispatch = useDispatch();
   const userId = useSelector((state: any) => state.user.userId);
 
-  const getFlowerData = async (userId: any) => {
+  const getUserData = async () => {
     try {
-      const { user } = await UserService.getUserInfo(userId);
+      const { user } = await UserService.getUserInfo();
       console.log(user);
       setUserData(user);
     } catch (error) {
@@ -28,7 +28,7 @@ const UserInfo = () => {
   };
 
   useEffect(() => {
-    getFlowerData(userId);
+    getUserData();
   }, []);
 
   const closeUserInfoPopup = () => {

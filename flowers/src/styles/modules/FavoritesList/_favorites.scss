@@ -8,13 +8,6 @@
     margin: 0 auto;
 }
 
-// .card2 {
-//     width: calc(25% - 20px); 
-//     height: 400px;
-//     background-size: cover;
-//     background-repeat: no-repeat;
-//     background-position: center;
-//     position: relative;
 .card2 {
     width: calc(25% - 20px);
     height: 400px;
@@ -24,6 +17,18 @@
     position: relative;
     display: flex; 
     flex-direction: column; 
+
+    &__icon {
+        position: absolute;
+        top: 10px; 
+        right: 10px; 
+        height: 20px;
+        width: 20px;
+        color: rgb(198, 194, 194);
+        background-color: white;
+        border-radius: 50%;
+        padding: 3px;
+    }
 
     &__heading {
         color: white;

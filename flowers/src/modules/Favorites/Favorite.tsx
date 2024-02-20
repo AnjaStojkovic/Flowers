@@ -1,5 +1,4 @@
-import { Link } from "react-router-dom";
-import flower from "../../assets/images/flower.jpg";
+import StarIcon from "../../components/svgs/Star-Icon";
 
 interface FavoriteProps {
   name: string;
@@ -20,6 +19,7 @@ const Favorite: React.FC<FavoriteProps> = ({
       style={{ backgroundImage: `url(${profilePicture})` }}
     >
       <div>
+        <StarIcon className="card2__icon" />
         <h1 className="card2__heading">{name}</h1>
         <p className="card2__description">{latinName}</p>
         <p className="card2__sightings">Sightings: {sightings}</p>

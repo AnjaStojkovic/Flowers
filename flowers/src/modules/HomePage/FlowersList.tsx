@@ -10,23 +10,32 @@ interface Flower {
   profile_picture: string;
 }
 
-const FlowersList: React.FC = () => {
+interface FlowersListProps {
+  searchParams: { name: string };
+}
+
+const FlowersList: React.FC<FlowersListProps> = ({ searchParams }) => {
   const [flowersData, setFlowersData] = useState<Flower[]>([]);
 
-  const getFlowersData = async () => {
-    try {
-      const { flowers } = await FlowersService.getFlowers();
-      console.log(flowers);
-      setFlowersData(flowers);
-    } catch (error) {
-      console.error("An error occurred while fetching flowers:", error);
-      setFlowersData([]);
-    }
-  };
-
   useEffect(() => {
-    getFlowersData();
-  }, []);
+    const fetchData = async () => {
+      try {
+        let response;
+        if (searchParams.name !== "") {
+          response = await FlowersService.getSearchedFlowers(searchParams.name);
+        } else {
+          response = await FlowersService.getFlowers();
+        }
+        console.log(response.flowers);
+        setFlowersData(response.flowers);
+      } catch (error) {
+        console.error("An error occurred while fetching flowers:", error);
+        setFlowersData([]);
+      }
+    };
+
+    fetchData();
+  }, [searchParams]);
 
   return (
     <div className="imagesList">

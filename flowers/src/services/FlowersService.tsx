@@ -15,7 +15,7 @@ const FlowersService = {
       });
   },
 
-  getFavorites: (userId: any, page: number) => {
+  getFavorites: (page: number) => {
     const url = `https://flowrspot-api.herokuapp.com/api/v1/flowers/favorites?page=${page}`;
     const authToken = getAuthToken();
     return axios
@@ -31,6 +31,18 @@ const FlowersService = {
         alert("An error occurred while loading favorite flowers");
         throw error;
       });
+  },
+
+  getSearchedFlowers: async (name: string) => {
+    const url = `https://flowrspot-api.herokuapp.com/api/v1/flowers/search?query=${name}`;
+    const authToken = getAuthToken();
+    try {
+      const res = await axios.get(url);
+      return res.data;
+    } catch (error) {
+      alert("An error occurred while loading searched flowers");
+      throw error;
+    }
   },
 
   getOneFlower: (flowerId: any) => {

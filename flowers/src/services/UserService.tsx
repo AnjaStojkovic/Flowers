@@ -18,7 +18,7 @@ const UserService = {
       });
   },
 
-  getUserInfo: (userId: any) => {
+  getUserInfo: () => {
     const url = "https://flowrspot-api.herokuapp.com/api/v1/users/me";
     return axios
       .get(url)

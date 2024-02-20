@@ -1,9 +1,6 @@
 import { useEffect, useState } from "react";
-import SightingsService from "../../services/SightingsService";
 import FlowersService from "../../services/FlowersService";
-import Card from "../HomePage/Card";
 import Favorite from "./Favorite";
-import { useDispatch, useSelector } from "react-redux";
 import SearchBox from "../../components/SearchBox";
 
 interface Flower {
@@ -20,37 +17,62 @@ interface FavoriteData {
 
 const FavoritesList = () => {
   const [favoritesData, setFavoritesData] = useState<FavoriteData[]>([]);
-  const [currentPage, setCurrentPage] = useState(1);
+  const [filteredFavorites, setFilteredFavorites] = useState<FavoriteData[]>(
+    []
+  );
+  const [currentPage, setCurrentPage] = useState(0);
+  const [totalPages, setTotalPages] = useState(0);
   console.log(favoritesData);
-  const userId = useSelector((state: any) => state.user.userId);
 
-  const getFavoritesData = async (userId: any, page: number) => {
-    try {
-      const response = await FlowersService.getFavorites(userId, page);
-      const favorites = response.fav_flowers;
-      console.log(favorites);
-      setFavoritesData(favorites);
-    } catch (error) {
-      console.error(
-        "An error occurred while fetching favorite flowers:",
-        error
-      );
-      setFavoritesData([]);
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await FlowersService.getFavorites(currentPage);
+        const favorites = response.fav_flowers;
+        setFavoritesData(favorites);
+        setFilteredFavorites(favorites);
+        setCurrentPage(response.meta.pagination.current_page);
+        setTotalPages(response.meta.pagination.total_pages);
+      } catch (error) {
+        console.error(
+          "An error occurred while fetching favorite flowers:",
+          error
+        );
+        setFavoritesData([]);
+        setFilteredFavorites([]);
+      }
+    };
+
+    fetchData();
+  }, [currentPage]);
+
+  const handlePreviousPage = () => {
+    if (currentPage > 1) {
+      setCurrentPage(currentPage - 1);
     }
   };
 
-  useEffect(() => {
-    getFavoritesData(userId, currentPage);
-  }, []);
+  const handleNextPage = () => {
+    if (currentPage < totalPages) {
+      setCurrentPage(currentPage + 1);
+    }
+  };
+
+  const handleSearch = (searchTerm: string) => {
+    const filtered = favoritesData.filter((favorite) =>
+      favorite.flower.name.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+    setFilteredFavorites(filtered);
+  };
 
   return (
     <>
       <div className="search-favorites">
-        <SearchBox />
+        <SearchBox onSearchSubmit={handleSearch} />
       </div>
       <div className="favoritesList">
-        {favoritesData &&
-          favoritesData.map((favorite) => (
+        {filteredFavorites &&
+          filteredFavorites.map((favorite) => (
             <Favorite
               key={favorite.flower.id}
               name={favorite.flower.name}
@@ -59,7 +81,22 @@ const FavoritesList = () => {
               profilePicture={favorite.flower.profile_picture}
             />
           ))}
-        ;
+      </div>
+      <div className="pagination">
+        <button
+          className="pagination__button"
+          onClick={handlePreviousPage}
+          disabled={currentPage === 1}
+        >
+          Previous
+        </button>
+        <button
+          className="pagination__button"
+          onClick={handleNextPage}
+          disabled={currentPage === totalPages}
+        >
+          Next
+        </button>
       </div>
     </>
   );

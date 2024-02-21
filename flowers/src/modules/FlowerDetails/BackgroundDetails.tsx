@@ -1,5 +1,6 @@
 import star from "../../assets/images/star-circle.svg";
 import flower from "../../assets/images/pink-flower.png";
+import { useNavigate } from "react-router-dom";
 
 interface FlowerDetailsProps {
   id: number;
@@ -22,6 +23,8 @@ const BackgroundDetails: React.FC<FlowerDetailsProps> = ({
   features,
   description,
 }) => {
+  const navigate = useNavigate();
+
   return (
     <div className="detailsContainer">
       <div className="sightings-container">
@@ -31,7 +34,9 @@ const BackgroundDetails: React.FC<FlowerDetailsProps> = ({
       <p className="name">{name}</p>
       <div className="add-sighting-container">
         <span className="latinName">{latin_name}</span>
-        <button className="add-sighting">+Add New Sighting</button>
+        <button onClick={() => navigate("/create")} className="add-sighting">
+          +Add New Sighting
+        </button>
       </div>
       <img className="flower" src={flower} alt="flower" />
       {/* <img className="flower" src={profile_picture} alt="flower" /> */}

@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import CardInfo from "./CardInfo";
 import Header from "./Header";
 import SightingsService from "../../services/SightingsService";
+import Pagination from "../../components/Pagination";
 
 interface User {
   id: number;
@@ -21,12 +22,16 @@ interface Card {
 
 const CardList = () => {
   const [sightingsData, setSightingsData] = useState<Card[]>([]);
+  const [currentPage, setCurrentPage] = useState(0);
+  const [totalPages, setTotalPages] = useState(0);
 
   const getSightingsData = async () => {
     try {
-      const { sightings } = await SightingsService.getSightings();
-      console.log(sightings);
+      const response = await SightingsService.getSightings(currentPage);
+      const { sightings } = response;
       setSightingsData(sightings);
+      setCurrentPage(response.meta.pagination.current_page);
+      setTotalPages(response.meta.pagination.total_pages);
     } catch (error) {
       console.error("An error occurred while fetching sightings:", error);
       setSightingsData([]);
@@ -35,9 +40,19 @@ const CardList = () => {
 
   useEffect(() => {
     getSightingsData();
-  }, []);
+  }, [currentPage]);
 
-  console.log(sightingsData);
+  const handlePreviousPage = () => {
+    if (currentPage > 1) {
+      setCurrentPage(currentPage - 1);
+    }
+  };
+
+  const handleNextPage = () => {
+    if (currentPage < totalPages) {
+      setCurrentPage(currentPage + 1);
+    }
+  };
 
   return (
     <div>
@@ -56,6 +71,12 @@ const CardList = () => {
         ))}
         ;
       </div>
+      <Pagination
+        currentPage={currentPage}
+        totalPages={totalPages}
+        onPreviousPage={handlePreviousPage}
+        onNextPage={handleNextPage}
+      />
     </div>
   );
 };

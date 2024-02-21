@@ -47,7 +47,7 @@ const Header: React.FC<{}> = () => {
       ) : (
         <p>No user found</p>
       )}
-      <button className="report-button">Report</button>
+      <button className="red-button">Report</button>
     </div>
   );
 };

@@ -52,16 +52,34 @@
     color: red; 
   }
 
-  .report-button {
+  .red-button {
     padding: 5px 20px;
-    background-color: rgba(255, 72, 0, 0.731);
+    background-color: rgb(255, 72, 0);
     color: #fff;
     border: none;
     border-radius: 5px;
     cursor: pointer;
     width: fit-content; 
     margin-left: auto;
+    box-shadow: 0 0 11px rgba(0, 0, 0, 0.1);
+    z-index: 111111;
+  
+    &:hover {
+      background-color: rgb(255, 151, 14);
+    }
+  }
+
+  .white-button {
+    padding: 5px 20px;
+    background-color: rgb(255, 252, 252);
+    color: #ff441e;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    width: fit-content; 
+    margin-left: auto;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    z-index: 111111;
   
     &:hover {
       background-color: rgb(255, 151, 14);
@@ -85,7 +103,7 @@
   .pagination {
 
     display: flex;
-    justify-content: end;
+    justify-content: center;
     margin-bottom: 30px;
     margin-top: 45px;
     margin-right: 20px;

@@ -11,6 +11,8 @@ import NotFound from "../modules/NotFound";
 import FlowerDetails from "../modules/FlowerDetails/FlowerDetails";
 import CardList from "../modules/UserFlowers/CardList";
 import FavoritesList from "../modules/Favorites/FavoritesList";
+import SightingPage from "../modules/SightingComments/SightingPage";
+import AddSighting from "../modules/AddSighting/AddSighting";
 
 const Navigation: React.FC = () => {
   const routes = createBrowserRouter([
@@ -30,6 +32,14 @@ const Navigation: React.FC = () => {
     {
       path: "/favorites",
       element: <FavoritesList />,
+    },
+    {
+      path: "/sighting/:sightingId",
+      element: <SightingPage />,
+    },
+    {
+      path: "/create",
+      element: <AddSighting />,
     },
   ]);
 

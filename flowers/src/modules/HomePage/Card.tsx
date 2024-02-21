@@ -16,7 +16,6 @@ const Card: React.FC<CardProps> = ({
   sightings,
   imageUrl,
 }) => {
-  console.log(name, description);
   return (
     // <div className="card" style={{ backgroundImage: `url(${imageUrl})` }}>
     <Link

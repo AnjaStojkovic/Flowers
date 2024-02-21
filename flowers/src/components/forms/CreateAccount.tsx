@@ -63,6 +63,7 @@ const CreateAccount = () => {
             type="text"
             placeholder="First name"
             register={register("first_name")}
+            className="form-field"
           />
         </label>
         <label>
@@ -70,6 +71,7 @@ const CreateAccount = () => {
             type="text"
             placeholder="Last name"
             register={register("last_name")}
+            className="form-field"
           />
         </label>
       </div>
@@ -79,6 +81,7 @@ const CreateAccount = () => {
             type="date"
             placeholder="Date of birth"
             register={register("date_of_birth")}
+            className="form-field"
           />
         </label>
       </div>
@@ -88,6 +91,7 @@ const CreateAccount = () => {
             type="email"
             placeholder="Email Address"
             register={register("email")}
+            className="form-field"
           />
         </label>
       </div>
@@ -97,6 +101,7 @@ const CreateAccount = () => {
             type="password"
             placeholder="Password"
             register={register("password")}
+            className="form-field"
           />
         </label>
       </div>

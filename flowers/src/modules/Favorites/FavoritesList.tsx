@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import FlowersService from "../../services/FlowersService";
 import Favorite from "./Favorite";
 import SearchBox from "../../components/SearchBox";
+import Pagination from "../../components/Pagination";
 
 interface Flower {
   id: number;
@@ -82,22 +83,12 @@ const FavoritesList = () => {
             />
           ))}
       </div>
-      <div className="pagination">
-        <button
-          className="pagination__button"
-          onClick={handlePreviousPage}
-          disabled={currentPage === 1}
-        >
-          Previous
-        </button>
-        <button
-          className="pagination__button"
-          onClick={handleNextPage}
-          disabled={currentPage === totalPages}
-        >
-          Next
-        </button>
-      </div>
+      <Pagination
+        currentPage={currentPage}
+        totalPages={totalPages}
+        onPreviousPage={handlePreviousPage}
+        onNextPage={handleNextPage}
+      />
     </>
   );
 };

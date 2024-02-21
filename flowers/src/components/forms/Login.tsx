@@ -44,6 +44,7 @@ const Login = () => {
             type="email"
             placeholder="Email Address"
             register={register("email")}
+            className="form-field"
           />
         </label>
       </div>
@@ -53,6 +54,7 @@ const Login = () => {
             type="password"
             placeholder="Password"
             register={register("password")}
+            className="form-field"
           />
         </label>
       </div>

@@ -1,18 +1,24 @@
 import React from "react";
 
 interface InputProps {
-  type: "text" | "email" | "date" | "email" | "password";
-  placeholder: string;
+  type: "text" | "email" | "date" | "email" | "password" | "file";
   register: any; // menjacu
+  className: "input-box" | "form-field";
+  placeholder?: string;
 }
 
-const Input: React.FC<InputProps> = ({ type, placeholder, register }) => {
+const Input: React.FC<InputProps> = ({
+  type,
+  placeholder,
+  register,
+  className,
+}) => {
   return (
     <input
       type={type}
-      className="form-field"
       {...register}
       placeholder={placeholder}
+      className={className}
     />
   );
 };

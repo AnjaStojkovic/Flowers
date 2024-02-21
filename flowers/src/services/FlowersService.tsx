@@ -2,8 +2,8 @@ import axios, { AxiosResponse } from "axios";
 import { getAuthToken } from "./Auth";
 
 const FlowersService = {
-  getFlowers: () => {
-    const url = "https://flowrspot-api.herokuapp.com/api/v1/flowers";
+  getFlowers: (page: number) => {
+    const url = `https://flowrspot-api.herokuapp.com/api/v1/flowers?page=${page}`;
     return axios
       .get(url)
       .then((res: AxiosResponse) => {

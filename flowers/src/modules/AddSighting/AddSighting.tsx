@@ -17,9 +17,7 @@ const AddSighting: React.FC = () => {
             Explore between more than 8,427 sightings
           </h2>
         </div>
-        <div className="add-form">
-          <SightingForm />
-        </div>
+        <SightingForm />
       </div>
     </>
   );

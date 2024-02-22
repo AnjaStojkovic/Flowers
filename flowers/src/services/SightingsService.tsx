@@ -30,6 +30,8 @@ const SightingsService = {
   },
 
   postSighting: (formData: FormData) => {
+    console.log("1w3", formData.picture);
+    console.log("formdata", formData);
     const url = "https://flowrspot-api.herokuapp.com//api/v1/sightings";
     const authToken = getAuthToken();
     return axios

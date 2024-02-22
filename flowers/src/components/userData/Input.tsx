@@ -3,8 +3,9 @@ import React from "react";
 interface InputProps {
   type: "text" | "email" | "date" | "email" | "password" | "file";
   register: any; // menjacu
-  className: "input-box" | "form-field";
+  className: "input-box" | "form-field" | "input-field" | "file-input";
   placeholder?: string;
+  accept?: string;
 }
 
 const Input: React.FC<InputProps> = ({
@@ -12,6 +13,7 @@ const Input: React.FC<InputProps> = ({
   placeholder,
   register,
   className,
+  accept,
 }) => {
   return (
     <input
@@ -19,6 +21,7 @@ const Input: React.FC<InputProps> = ({
       {...register}
       placeholder={placeholder}
       className={className}
+      accept={accept}
     />
   );
 };

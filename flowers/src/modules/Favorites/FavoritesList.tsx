@@ -60,8 +60,8 @@ const FavoritesList = () => {
   };
 
   const handleSearch = (searchTerm: string) => {
-    const filtered = favoritesData.filter((favorite) =>
-      favorite.flower.name.toLowerCase().includes(searchTerm.toLowerCase())
+    const filtered = favoritesData.filter(({ flower: { name } }) =>
+      name.toLowerCase().includes(searchTerm.toLowerCase())
     );
     setFilteredFavorites(filtered);
   };
@@ -72,16 +72,19 @@ const FavoritesList = () => {
         <SearchBox onSearchSubmit={handleSearch} />
       </div>
       <div className="favoritesList">
-        {filteredFavorites &&
-          filteredFavorites.map((favorite) => (
+        {filteredFavorites?.map(
+          ({
+            flower: { id, name, latin_name, sightings, profile_picture },
+          }) => (
             <Favorite
-              key={favorite.flower.id}
-              name={favorite.flower.name}
-              latinName={favorite.flower.latin_name}
-              sightings={favorite.flower.sightings}
-              profilePicture={favorite.flower.profile_picture}
+              key={id}
+              name={name}
+              latinName={latin_name}
+              sightings={sightings}
+              profilePicture={profile_picture}
             />
-          ))}
+          )
+        )}
       </div>
       <Pagination
         currentPage={currentPage}

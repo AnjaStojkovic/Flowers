@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 interface PopupState {
   isOpen: boolean;
-  type: "login" | "createAccount" | "userInfo";
+  type: "login" | "createAccount" | "userInfo" | "settings";
 }
 
 const initialState: PopupState = {

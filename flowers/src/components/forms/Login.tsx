@@ -2,8 +2,8 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { login } from "../../services/Auth";
-import Button from "../buttons/Button";
-import Input from "../userData/Input";
+import Button from "../Buttons/Button";
+import Input from "../UserData/Input";
 import { useDispatch, useSelector } from "react-redux";
 import { setUserId } from "../../store/user-slice";
 

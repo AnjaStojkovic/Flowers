@@ -29,7 +29,6 @@ const FlowersList: React.FC<FlowersListProps> = ({ searchParams }) => {
         } else {
           response = await FlowersService.getFlowers(currentPage);
         }
-        console.log(response.flowers);
         setFlowersData(response.flowers);
         setCurrentPage(response.meta.pagination.current_page);
         setTotalPages(response.meta.pagination.total_pages);

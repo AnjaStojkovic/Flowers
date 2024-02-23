@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
-import CardInfo from "./CardInfo";
-import Header from "./Header";
+import CardInfo from "../../components/CardInfo";
 import SightingsService from "../../services/SightingsService";
 import Pagination from "../../components/Pagination";
 
@@ -56,7 +55,6 @@ const CardList = () => {
 
   return (
     <div>
-      <Header />
       <div className="cardsList">
         {sightingsData.map((sighting) => (
           <CardInfo

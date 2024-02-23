@@ -3,25 +3,15 @@ import flower from "../../assets/images/pink-flower.png";
 import { useNavigate } from "react-router-dom";
 
 interface FlowerDetailsProps {
-  id: number;
   name: string;
   latin_name: string;
   sightings: number;
-  profile_picture: string;
-  favorite: boolean;
-  features: string[];
-  description: string;
 }
 
 const BackgroundDetails: React.FC<FlowerDetailsProps> = ({
-  id,
   name,
   latin_name,
   sightings,
-  profile_picture,
-  favorite,
-  features,
-  description,
 }) => {
   const navigate = useNavigate();
 

@@ -1,18 +1,17 @@
 import React from "react";
 import styles from "./Navigation.module.scss";
-import {
-  createBrowserRouter,
-  RouterProvider,
-  Route,
-  Link,
-} from "react-router-dom";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Homepage from "../modules/HomePage/Homepage";
 import NotFound from "../modules/NotFound";
 import FlowerDetails from "../modules/FlowerDetails/FlowerDetails";
-import CardList from "../modules/UserFlowers/CardList";
 import FavoritesList from "../modules/Favorites/FavoritesList";
 import SightingPage from "../modules/SightingComments/SightingPage";
 import AddSighting from "../modules/AddSighting/AddSighting";
+import SightingListPage from "../modules/SightingList/SightingListPage";
+import UserSightingsList from "../modules/UserSightings/UserSightingsList";
+import { useSelector } from "react-redux";
+import { RootState } from "../store/store";
+import Settings from "../components/Settings";
 
 const Navigation: React.FC = () => {
   const routes = createBrowserRouter([
@@ -26,8 +25,12 @@ const Navigation: React.FC = () => {
       element: <FlowerDetails />,
     },
     {
-      path: "/cards",
-      element: <CardList />,
+      path: "/sightings",
+      element: <SightingListPage />,
+    },
+    {
+      path: "/usersightings",
+      element: <UserSightingsList />,
     },
     {
       path: "/favorites",
@@ -40,6 +43,10 @@ const Navigation: React.FC = () => {
     {
       path: "/create",
       element: <AddSighting />,
+    },
+    {
+      path: "/settings",
+      element: <Settings />,
     },
   ]);
 

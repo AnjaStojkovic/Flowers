@@ -1,12 +1,13 @@
 import React, { useState } from "react";
-import CreateAccount from "../forms/CreateAccount";
-import Login from "../forms/Login";
+import CreateAccount from "../Forms/CreateAccount";
+import Login from "../Forms/Login";
 import { useDispatch } from "react-redux";
-import UserInfo from "../userData/UserInfo";
+import UserInfo from "../UserData/UserInfo";
+import Settings from "../Settings";
 
 interface PopupProps {
   isOpen: boolean;
-  type: "login" | "createAccount" | "userInfo";
+  type: "login" | "createAccount" | "userInfo" | "settings";
 }
 
 const Popup: React.FC<PopupProps> = ({ isOpen, type }) => {
@@ -18,6 +19,7 @@ const Popup: React.FC<PopupProps> = ({ isOpen, type }) => {
           {type === "login" && <Login />}
           {type === "createAccount" && <CreateAccount />}
           {type === "userInfo" && <UserInfo />}
+          {type === "settings" && <Settings />}
         </div>
       )}
     </>

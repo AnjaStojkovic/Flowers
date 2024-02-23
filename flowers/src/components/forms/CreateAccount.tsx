@@ -2,8 +2,8 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import UserService from "../../services/UserService";
-import Button from "../buttons/Button";
-import Input from "../userData/Input";
+import Button from "../Buttons/Button";
+import Input from "../UserData/Input";
 import { yupResolver } from "@hookform/resolvers/yup";
 
 // interface FormData<T> {

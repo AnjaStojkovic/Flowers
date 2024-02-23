@@ -1,6 +1,6 @@
 import axios, { AxiosResponse } from "axios";
 import { getAuthToken } from "./Auth";
-import { FormData } from "../components/forms/SightingForm";
+import { MyFormData } from "../components/Forms/SightingForm";
 
 const SightingsService = {
   getSightings: (page: number) => {
@@ -30,7 +30,6 @@ const SightingsService = {
   },
 
   postSighting: (formData: FormData) => {
-    console.log("1w3", formData.picture);
     console.log("formdata", formData);
     const url = "https://flowrspot-api.herokuapp.com//api/v1/sightings";
     const authToken = getAuthToken();

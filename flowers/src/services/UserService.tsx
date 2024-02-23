@@ -2,7 +2,8 @@
 import { AxiosResponse } from "axios";
 import axios from "../axios/Axios";
 
-import { FormData } from "../components/forms/CreateAccount";
+import { FormData } from "../components/Forms/CreateAccount";
+import { getAuthToken } from "./Auth";
 
 const UserService = {
   createAccount: (formData: FormData) => {
@@ -27,6 +28,24 @@ const UserService = {
       })
       .catch((error: Error) => {
         alert("An error occurred while loading information about the user");
+        throw error;
+      });
+  },
+
+  getUserSightings: (userId: any) => {
+    const url = `https://flowrspot-api.herokuapp.com/api/v1/users/${userId}/sightings`;
+    const authToken = getAuthToken();
+    return axios
+      .get(url, {
+        headers: {
+          Authorization: authToken,
+        },
+      })
+      .then((res: AxiosResponse) => {
+        return res.data;
+      })
+      .catch((error: Error) => {
+        alert("An error occurred while loading sightings");
         throw error;
       });
   },

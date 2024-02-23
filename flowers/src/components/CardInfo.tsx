@@ -1,12 +1,18 @@
-import flower from "../../assets/images/flower.jpg";
-import location from "../../assets/images/location.svg";
-import com from "../../assets/images/com.svg";
-import heart from "../../assets/images/heart.svg";
+import flower from "../assets/images/flower.jpg";
+import location from "../assets/images/location.svg";
+import com from "../assets/images/com.svg";
+import heart from "../assets/images/heart.svg";
+
+interface User {
+  id: number;
+  full_name: string;
+}
 
 interface CardInfoProps {
   name: string;
   id: number;
-  user: { full_name: string };
+  // user: { id: number; first_name: string; last_name: string };
+  user: User;
   description: string;
   picture: string;
   likes_count: number;
@@ -28,7 +34,7 @@ const CardInfo: React.FC<CardInfoProps> = ({
         <p className="location-box__location">Location</p>
         <img className="location-box__location-svg" src={location} />
       </div>
-      <img className="flower-img" src={flower} />
+      <img className="flower-img" src={picture} />
       <div className="user-box2">
         <img className="user-box2__profile-pic" src={flower} />
         <div className="user-box2__user">

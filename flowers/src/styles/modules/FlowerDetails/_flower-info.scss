@@ -12,11 +12,24 @@
 }
 
 .flower-description {
+    position: absolute;
     color: gray;
-    margin-top: 10px;
-    margin-right: 1050px;
-    width: 1000px;
-    margin-left: auto;
-    margin-top: 50px;
-    padding-left: 40px;
+    top: 550px;
+    right: 500px;
+    left: 400px;
+}
+
+.details-line {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    top: 850px;
+    border-top: 1px solid rgba(128, 128, 128, 0.417); 
+    width: 98%;
+    margin-bottom: 90px;
+    margin-left: 20px;
+}
+
+.flower-sightings {
+    margin-top: 200px;
 }

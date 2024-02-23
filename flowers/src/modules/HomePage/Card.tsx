@@ -17,7 +17,6 @@ const Card: React.FC<CardProps> = ({
   imageUrl,
 }) => {
   return (
-    // <div className="card" style={{ backgroundImage: `url(${imageUrl})` }}>
     <Link
       className="card"
       style={{ backgroundImage: `url(${imageUrl})` }}

@@ -1,4 +1,4 @@
-import StarIcon from "../../components/svgs/Star-Icon";
+import StarIcon from "../../components/Svgs/Star-Icon";
 
 interface FavoriteProps {
   name: string;

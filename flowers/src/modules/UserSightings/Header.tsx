@@ -9,23 +9,11 @@ interface User {
   last_name: string;
 }
 
-const Header: React.FC<{}> = () => {
-  const [userData, setUserData] = useState<User | undefined>();
+interface Props {
+  userData: User | undefined;
+}
 
-  const getUserData = async () => {
-    try {
-      const { user } = await UserService.getUserInfo();
-      console.log(user);
-      setUserData(user);
-    } catch (error) {
-      console.error("An error occurred while fetching the user data:", error);
-    }
-  };
-
-  useEffect(() => {
-    getUserData();
-  }, []);
-
+const Header: React.FC<Props> = ({ userData }) => {
   return (
     <div className="header-box">
       {isAuthenticated() ? (

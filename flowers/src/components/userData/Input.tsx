@@ -6,6 +6,7 @@ interface InputProps {
   className: "input-box" | "form-field" | "input-field" | "file-input";
   placeholder?: string;
   accept?: string;
+  defaultValue?: string;
 }
 
 const Input: React.FC<InputProps> = ({
@@ -14,6 +15,7 @@ const Input: React.FC<InputProps> = ({
   register,
   className,
   accept,
+  defaultValue,
 }) => {
   return (
     <input
@@ -22,6 +24,7 @@ const Input: React.FC<InputProps> = ({
       placeholder={placeholder}
       className={className}
       accept={accept}
+      defaultValue={defaultValue}
     />
   );
 };

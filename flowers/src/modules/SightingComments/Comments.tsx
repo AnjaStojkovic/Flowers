@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import OneComment from "./OneComment";
 import CommentsService from "../../services/CommentsService";
 import { useParams } from "react-router-dom";
-import Input from "../../components/userData/Input";
+import Input from "../../components/UserData/Input";
 import { useForm } from "react-hook-form";
 import Pagination from "../../components/Pagination";
 
@@ -36,7 +36,6 @@ const Comments: React.FC<CommentsProps> = ({ created_at, comments_count }) => {
         sightingId
       );
       const { comments } = response;
-      console.log(comments);
       setComments(comments);
       setCurrentPage(response.meta.pagination.current_page);
       setTotalPages(response.meta.pagination.total_pages);
@@ -98,6 +97,7 @@ const Comments: React.FC<CommentsProps> = ({ created_at, comments_count }) => {
         placeholder="Write a comment..."
         register={register("content")}
         className="input-box"
+        defaultValue=""
       />
       <div className="input-submit">
         <button className="red-button" onClick={handleSubmit(onSubmit)}>

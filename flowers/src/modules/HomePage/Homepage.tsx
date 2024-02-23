@@ -10,14 +10,12 @@ const Homepage = () => {
     setSearchParams({ name: searchTerm });
   };
 
-  const isOpen = true;
   return (
     <div className="homepageContainer">
       <Background />
       <div className="homepageContainer__search-box">
         <SearchBox onSearchSubmit={handleSearch} />
       </div>
-
       <FlowersList searchParams={searchParams} />
     </div>
   );

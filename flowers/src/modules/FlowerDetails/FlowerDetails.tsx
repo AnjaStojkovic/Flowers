@@ -3,6 +3,8 @@ import BackgroundDetails from "./BackgroundDetails";
 import FlowerInfo from "./FlowerInfo";
 import FlowersService from "../../services/FlowersService";
 import { useParams } from "react-router-dom";
+import FloweSightings from "../FlowerDetails/FlowerSightings";
+import FlowerSightings from "../FlowerDetails/FlowerSightings";
 
 interface Flower {
   id: number;
@@ -22,7 +24,6 @@ const FlowerDetails: React.FC = () => {
   const getFlowerData = async (flowerId: any) => {
     try {
       const { flower } = await FlowersService.getOneFlower(flowerId);
-      console.log(flower);
       setFlowerData(flower);
     } catch (error) {
       console.error("An error occurred while fetching the flower:", error);
@@ -38,16 +39,15 @@ const FlowerDetails: React.FC = () => {
       {flowerData && (
         <>
           <BackgroundDetails
-            id={flowerData.id}
             name={flowerData.name}
             latin_name={flowerData.latin_name}
             sightings={flowerData.sightings}
-            profile_picture={flowerData.profile_picture}
-            favorite={flowerData.favorite}
-            features={flowerData.features}
-            description={flowerData.description}
           />
           <FlowerInfo description={flowerData.description} />
+          <hr className="details-line" />
+          <div className="flower-sightings">
+            <FlowerSightings flowerId={flowerData.id} />
+          </div>
         </>
       )}
     </>

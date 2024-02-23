@@ -1,5 +1,5 @@
 import MapComponent from "../../components/Map";
-import SightingForm from "../../components/forms/SightingForm";
+import SightingForm from "../../components/Forms/SightingForm";
 
 const AddSighting: React.FC = () => {
   return (

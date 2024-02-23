@@ -2,12 +2,12 @@ import React, { ReactNode, useState } from "react";
 import logo from "../../assets/images/flowerLogo.svg";
 import { Link } from "../Link/Link";
 import Modal from "react-modal";
-import Popup from "../popups/Popup";
-import Login from "../forms/Login";
+// import Login from "../forms/Login";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../store/store";
 import { closePopup, openPopup } from "../../store/popup-slice";
 import { isAuthenticated } from "../../services/Auth";
+import Popup from "../Popups/Popup";
 
 interface LayoutProps {
   children?: ReactNode;
@@ -47,6 +47,10 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
     dispatch(openPopup("userInfo"));
   };
 
+  const openSettingsPopup = () => {
+    dispatch(openPopup("settings"));
+  };
+
   return (
     <div className="layoutContainer">
       <div className="layoutContainer__leftSide">
@@ -62,7 +66,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
         <Link
           name="Latest sightings"
           style="layoutContainer__rightSide__link"
-          route="/cards"
+          route="/usersightings"
         />
         <Link
           name="Favorites"
@@ -72,7 +76,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
         {isAuthenticated() ? (
           <button
             onClick={openUserInfoPopup}
-            className="bayoutContainer__rightSide__link layoutContainer__rightSide__link--loginLink"
+            className="layoutContainer__rightSide__link layoutContainer__rightSide__link--loginLink"
           >
             Username
           </button>
@@ -80,7 +84,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
           <div className="layoutContainer__rightSide__login">
             <button
               onClick={openLoginPopup}
-              className="bayoutContainer__rightSide__link layoutContainer__rightSide__link--loginLink"
+              className="layoutContainer__rightSide__link layoutContainer__rightSide__link--loginLink"
             >
               Login
             </button>
@@ -89,6 +93,12 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
             </button>
           </div>
         )}
+        <button
+          className="layoutContainer__rightSide__link"
+          onClick={openSettingsPopup}
+        >
+          Settings
+        </button>
       </div>
 
       <Modal isOpen={isOpen} onRequestClose={closeModal} style={customStyles}>

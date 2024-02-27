@@ -1,4 +1,3 @@
-//import axios, { AxiosResponse } from "axios";
 import { AxiosResponse } from "axios";
 import axios from "../axios/Axios";
 

@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
-import flower from "../../assets/images/flower.jpg";
+import StarIcon from "../../components/Svgs/Star-Icon";
+import FlowersService from "../../services/FlowersService";
 
 interface CardProps {
   id: number;
@@ -16,6 +17,15 @@ const Card: React.FC<CardProps> = ({
   sightings,
   imageUrl,
 }) => {
+  const handleFavoriteClick = async () => {
+    try {
+      await FlowersService.postFavoriteFlower(id);
+      alert("Flower added to favorites");
+    } catch (error) {
+      alert("An error occured while adding flower to favorites");
+    }
+  };
+
   return (
     <Link
       className="card"
@@ -23,6 +33,7 @@ const Card: React.FC<CardProps> = ({
       key={id}
       to={`/details/${id}`}
     >
+      <StarIcon className="card2__icon" onClick={handleFavoriteClick} />
       <h1 className="card__heading">{name}</h1>
       <p className="card__description">{description}</p>
       <p className="card__sightings">Sightings: {sightings}</p>

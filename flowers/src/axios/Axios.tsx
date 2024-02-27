@@ -2,6 +2,8 @@ import axios from "axios";
 import { logout } from "../services/Auth";
 import * as jwt_decode from "jwt-decode";
 import { jwtDecode } from "jwt-decode";
+import { useDispatch } from "react-redux";
+import { closePopup } from "../store/popup-slice";
 
 var Axios = axios.create({
   baseURL: "https://flowrspot-api.herokuapp.com",
@@ -9,17 +11,13 @@ var Axios = axios.create({
 });
 
 Axios.interceptors.request.use(
-  async function success(config) {
-    console.log("Interceptor for requests called");
+  async (config) => {
     const jwt = localStorage.getItem("jwt");
-    console.log(jwt);
     if (jwt) {
       const decoded = jwtDecode(jwt);
       if (decoded.exp && decoded.exp * 1000 < Date.now()) {
-        console.log("Token has expired. Refreshing token...");
         try {
           const refreshedToken = await refreshAccessToken();
-          console.log("Refreshed token:", refreshedToken);
           config.headers["Authorization"] = "Bearer " + refreshedToken;
           config.headers["Content-Type"] = "application/json";
         } catch (refreshError) {
@@ -27,7 +25,6 @@ Axios.interceptors.request.use(
           await logout();
           return Promise.reject(refreshError);
         }
-        console.log("Token has expired");
       } else {
         config.headers["Authorization"] = "Bearer " + jwt;
         config.headers["Content-Type"] = "application/json";
@@ -40,7 +37,7 @@ Axios.interceptors.request.use(
   }
 );
 
-async function refreshAccessToken() {
+const refreshAccessToken = async () => {
   try {
     const response = await axios.post(
       "https://flowrspot-api.herokuapp.com/api/v1/users/me/refresh"
@@ -51,10 +48,10 @@ async function refreshAccessToken() {
   } catch (error) {
     throw new Error("Failed to refresh token");
   }
-}
+};
 
 Axios.interceptors.response.use(
-  function success(response) {
+  (response) => {
     return response;
   },
   function failure(error) {

@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import OneComment from "./OneComment";
 import CommentsService from "../../services/CommentsService";
-import { useParams } from "react-router-dom";
 import Input from "../../components/UserData/Input";
 import { useForm } from "react-hook-form";
 import Pagination from "../../components/Pagination";
@@ -9,6 +8,7 @@ import Pagination from "../../components/Pagination";
 interface CommentsProps {
   created_at: Date;
   comments_count?: number;
+  sightingId: number;
 }
 
 interface Comment {
@@ -22,11 +22,14 @@ export interface FormData {
   content: string;
 }
 
-const Comments: React.FC<CommentsProps> = ({ created_at, comments_count }) => {
+const Comments: React.FC<CommentsProps> = ({
+  created_at,
+  comments_count,
+  sightingId,
+}) => {
   const [comments, setComments] = useState<Comment[]>([]);
   const [currentPage, setCurrentPage] = useState(0);
   const [totalPages, setTotalPages] = useState(0);
-  const { sightingId } = useParams();
   const { register, handleSubmit, reset } = useForm<FormData>();
 
   const getCommentsData = async (sightingId: any) => {
@@ -64,16 +67,8 @@ const Comments: React.FC<CommentsProps> = ({ created_at, comments_count }) => {
       });
   };
 
-  const handlePreviousPage = () => {
-    if (currentPage > 1) {
-      setCurrentPage(currentPage - 1);
-    }
-  };
-
-  const handleNextPage = () => {
-    if (currentPage < totalPages) {
-      setCurrentPage(currentPage + 1);
-    }
+  const handlePageChange = (page: number) => {
+    setCurrentPage(page);
   };
 
   return (
@@ -86,10 +81,12 @@ const Comments: React.FC<CommentsProps> = ({ created_at, comments_count }) => {
       {comments &&
         comments.map((comment) => (
           <OneComment
+            id={comment.id}
             name={comment.user_full_name}
             sightings={comment.sightings}
             content={comment.content}
             created_at={created_at}
+            sightingId={sightingId}
           />
         ))}
       <Input
@@ -107,8 +104,7 @@ const Comments: React.FC<CommentsProps> = ({ created_at, comments_count }) => {
       <Pagination
         currentPage={currentPage}
         totalPages={totalPages}
-        onPreviousPage={handlePreviousPage}
-        onNextPage={handleNextPage}
+        onPageChange={handlePageChange}
       />
     </div>
   );

@@ -41,16 +41,8 @@ const FlowersList: React.FC<FlowersListProps> = ({ searchParams }) => {
     fetchData();
   }, [searchParams, currentPage]);
 
-  const handlePreviousPage = () => {
-    if (currentPage > 1) {
-      setCurrentPage(currentPage - 1);
-    }
-  };
-
-  const handleNextPage = () => {
-    if (currentPage < totalPages) {
-      setCurrentPage(currentPage + 1);
-    }
+  const handlePageChange = (page: number) => {
+    setCurrentPage(page);
   };
 
   return (
@@ -69,8 +61,7 @@ const FlowersList: React.FC<FlowersListProps> = ({ searchParams }) => {
       <Pagination
         currentPage={currentPage}
         totalPages={totalPages}
-        onPreviousPage={handlePreviousPage}
-        onNextPage={handleNextPage}
+        onPageChange={handlePageChange}
       />
     </>
   );

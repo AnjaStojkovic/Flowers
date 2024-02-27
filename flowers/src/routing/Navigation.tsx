@@ -5,7 +5,7 @@ import Homepage from "../modules/HomePage/Homepage";
 import NotFound from "../modules/NotFound";
 import FlowerDetails from "../modules/FlowerDetails/FlowerDetails";
 import FavoritesList from "../modules/Favorites/FavoritesList";
-import SightingPage from "../modules/SightingComments/SightingPage";
+import SightingPage from "../modules/Sighting/SightingPage";
 import AddSighting from "../modules/AddSighting/AddSighting";
 import SightingListPage from "../modules/SightingList/SightingListPage";
 import UserSightingsList from "../modules/UserSightings/UserSightingsList";

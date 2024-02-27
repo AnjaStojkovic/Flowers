@@ -3,21 +3,30 @@ import React from "react";
 interface PaginationProps {
   currentPage: number;
   totalPages: number;
-  onPreviousPage: () => void;
-  onNextPage: () => void;
+  onPageChange: (page: number) => void;
 }
 
 const Pagination: React.FC<PaginationProps> = ({
   currentPage,
   totalPages,
-  onPreviousPage,
-  onNextPage,
+  onPageChange,
 }) => {
+  const handlePreviousPage = () => {
+    if (currentPage > 1) {
+      onPageChange(currentPage - 1);
+    }
+  };
+
+  const handleNextPage = () => {
+    if (currentPage < totalPages) {
+      onPageChange(currentPage + 1);
+    }
+  };
   return (
     <div className="pagination">
       <button
         className="pagination__button"
-        onClick={onPreviousPage}
+        onClick={handlePreviousPage}
         disabled={currentPage === 1}
       >
         Previous
@@ -25,7 +34,7 @@ const Pagination: React.FC<PaginationProps> = ({
 
       <button
         className="pagination__button"
-        onClick={onNextPage}
+        onClick={handleNextPage}
         disabled={currentPage === totalPages}
       >
         Next

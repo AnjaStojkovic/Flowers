@@ -3,6 +3,7 @@ import FlowersService from "../../services/FlowersService";
 import Favorite from "./Favorite";
 import SearchBox from "../../components/SearchBox";
 import Pagination from "../../components/Pagination";
+import { useNavigate } from "react-router-dom";
 
 interface Flower {
   id: number;
@@ -13,6 +14,7 @@ interface Flower {
 }
 
 interface FavoriteData {
+  id: number;
   flower: Flower;
 }
 
@@ -23,7 +25,6 @@ const FavoritesList = () => {
   );
   const [currentPage, setCurrentPage] = useState(0);
   const [totalPages, setTotalPages] = useState(0);
-  console.log(favoritesData);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -47,16 +48,8 @@ const FavoritesList = () => {
     fetchData();
   }, [currentPage]);
 
-  const handlePreviousPage = () => {
-    if (currentPage > 1) {
-      setCurrentPage(currentPage - 1);
-    }
-  };
-
-  const handleNextPage = () => {
-    if (currentPage < totalPages) {
-      setCurrentPage(currentPage + 1);
-    }
+  const handlePageChange = (page: number) => {
+    setCurrentPage(page);
   };
 
   const handleSearch = (searchTerm: string) => {
@@ -66,31 +59,40 @@ const FavoritesList = () => {
     setFilteredFavorites(filtered);
   };
 
+  const handleRemoveFavorite = async (flowerId: number, id: number) => {
+    try {
+      await FlowersService.deleteFavoriteFlower(flowerId, id);
+      setFavoritesData(favoritesData.filter((favorite) => favorite.id !== id));
+      alert("Flower removed from favorites");
+      window.location.reload();
+    } catch (error) {
+      alert("An error occured while removing flower from favorites");
+    }
+  };
+
   return (
     <>
       <div className="search-favorites">
         <SearchBox onSearchSubmit={handleSearch} />
       </div>
       <div className="favoritesList">
-        {filteredFavorites?.map(
-          ({
-            flower: { id, name, latin_name, sightings, profile_picture },
-          }) => (
-            <Favorite
-              key={id}
-              name={name}
-              latinName={latin_name}
-              sightings={sightings}
-              profilePicture={profile_picture}
-            />
-          )
-        )}
+        {filteredFavorites?.map((favoriteData) => (
+          <Favorite
+            key={favoriteData.id}
+            id={favoriteData.id}
+            flowerId={favoriteData.flower.id}
+            name={favoriteData.flower.name}
+            latinName={favoriteData.flower.latin_name}
+            sightings={favoriteData.flower.sightings}
+            profilePicture={favoriteData.flower.profile_picture}
+            onRemove={handleRemoveFavorite}
+          />
+        ))}
       </div>
       <Pagination
         currentPage={currentPage}
         totalPages={totalPages}
-        onPreviousPage={handlePreviousPage}
-        onNextPage={handleNextPage}
+        onPageChange={handlePageChange}
       />
     </>
   );

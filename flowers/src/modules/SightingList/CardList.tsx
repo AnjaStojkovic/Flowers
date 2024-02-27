@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import CardInfo from "../../components/CardInfo";
 import SightingsService from "../../services/SightingsService";
 import Pagination from "../../components/Pagination";
+import { Link } from "react-router-dom";
 
 interface User {
   id: number;
@@ -41,16 +42,8 @@ const CardList = () => {
     getSightingsData();
   }, [currentPage]);
 
-  const handlePreviousPage = () => {
-    if (currentPage > 1) {
-      setCurrentPage(currentPage - 1);
-    }
-  };
-
-  const handleNextPage = () => {
-    if (currentPage < totalPages) {
-      setCurrentPage(currentPage + 1);
-    }
+  const handlePageChange = (page: number) => {
+    setCurrentPage(page);
   };
 
   return (
@@ -67,13 +60,11 @@ const CardList = () => {
             comments_count={sighting.comments_count}
           />
         ))}
-        ;
       </div>
       <Pagination
         currentPage={currentPage}
         totalPages={totalPages}
-        onPreviousPage={handlePreviousPage}
-        onNextPage={handleNextPage}
+        onPageChange={handlePageChange}
       />
     </div>
   );

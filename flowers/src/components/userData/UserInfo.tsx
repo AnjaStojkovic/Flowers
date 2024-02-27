@@ -20,7 +20,6 @@ const UserInfo = () => {
   const getUserData = async () => {
     try {
       const { user } = await UserService.getUserInfo();
-      console.log(user);
       setUserData(user);
     } catch (error) {
       console.error("An error occurred while fetching the user data:", error);
@@ -33,6 +32,11 @@ const UserInfo = () => {
 
   const closeUserInfoPopup = () => {
     dispatch(closePopup());
+  };
+
+  const handleLogout = () => {
+    logout();
+    closeUserInfoPopup();
   };
 
   return (
@@ -52,7 +56,7 @@ const UserInfo = () => {
         <UserInfoItem label="Last Name" value={userData?.last_name ?? ""} />
         <UserInfoItem label="Date of birth" value="May 20, 1989" />
         <UserInfoItem label="Email adress" value="john@gmail.com" />
-        <button onClick={logout} className="info-details__logout">
+        <button onClick={handleLogout} className="info-details__logout">
           Logout
         </button>
       </div>

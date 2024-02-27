@@ -53,8 +53,6 @@ const FlowerSightings: React.FC<FlowerProps> = ({ flowerId }) => {
     getSightingsData();
   }, [currentPage, flowerId]);
 
-  console.log(sightingsData);
-
   return (
     <div>
       <div className="cardsList">

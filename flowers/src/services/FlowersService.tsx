@@ -35,7 +35,6 @@ const FlowersService = {
 
   getSearchedFlowers: async (name: string) => {
     const url = `https://flowrspot-api.herokuapp.com/api/v1/flowers/search?query=${name}`;
-    const authToken = getAuthToken();
     try {
       const res = await axios.get(url);
       return res.data;
@@ -54,6 +53,46 @@ const FlowersService = {
       })
       .catch((error: Error) => {
         alert("An error occurred while loading the flower");
+        throw error;
+      });
+  },
+
+  postFavoriteFlower: (flowerId: any) => {
+    const url = `https://flowrspot-api.herokuapp.com/api/v1/flowers/${flowerId}/favorites`;
+    const authToken = getAuthToken();
+    return axios
+      .post(
+        url,
+        {},
+        {
+          headers: {
+            Authorization: authToken,
+          },
+        }
+      )
+      .then((res: AxiosResponse) => {
+        return res.data;
+      })
+      .catch((error: Error) => {
+        alert("An error occurred while posting the favorite flower");
+        throw error;
+      });
+  },
+
+  deleteFavoriteFlower: (flowerId: any, id: any) => {
+    const url = `https://flowrspot-api.herokuapp.com/api/v1/flowers/${flowerId}/favorites/${id}`;
+    const authToken = getAuthToken();
+    return axios
+      .delete(url, {
+        headers: {
+          Authorization: authToken,
+        },
+      })
+      .then((res: AxiosResponse) => {
+        return res.data;
+      })
+      .catch((error: Error) => {
+        alert("An error occurred while deleting the flower");
         throw error;
       });
   },

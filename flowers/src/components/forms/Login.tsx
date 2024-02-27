@@ -6,6 +6,7 @@ import Button from "../Buttons/Button";
 import Input from "../UserData/Input";
 import { useDispatch, useSelector } from "react-redux";
 import { setUserId } from "../../store/user-slice";
+import { closePopup } from "../../store/popup-slice";
 
 interface FormData {
   email: string;
@@ -17,18 +18,21 @@ const schema = yup.object().shape({
   password: yup.string().min(6).required(),
 });
 
-const Login = () => {
+const Login: React.FC = () => {
   const { register, handleSubmit } = useForm<FormData>();
   const dispatch = useDispatch();
+
+  const closeModal = () => {
+    dispatch(closePopup());
+  };
 
   const onSubmit = async (data: FormData) => {
     try {
       await schema.validate(data);
-      console.log("Valid data:", data);
-
       const userId = await login(data);
       if (userId) {
         dispatch(setUserId(userId));
+        closeModal();
       }
     } catch (error) {
       console.error("Validation error:", error);

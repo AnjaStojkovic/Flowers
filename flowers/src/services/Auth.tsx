@@ -1,5 +1,7 @@
 import { jwtDecode } from "jwt-decode";
 import axios from "../axios/Axios";
+import { setUserId } from "../store/user-slice";
+import { closePopup } from "../store/popup-slice";
 
 interface FormData {
   email: string;
@@ -22,26 +24,18 @@ export const login = async function (userData: FormData) {
         "Content-Type": "application/json",
       },
     });
-    console.log(ret, "response");
 
     const token = ret.data.auth_token;
     const decodedToken: JwtData = jwtDecode(token);
-    console.log(decodedToken);
     const userId = decodedToken.user_id;
-    //const role = decodedToken.role.authority;
-    //window.localStorage.setItem("role", role);
     localStorage.setItem("jwt", token);
-    console.log("Local storageee:", localStorage.getItem("jwt"));
     window.location.assign("/");
     return userId;
-  } catch (error) {
-    console.log(error);
-  }
+  } catch (error) {}
 };
 
 export const logout = function () {
   localStorage.removeItem("jwt");
-  // window.localStorage.removeItem("role");
   window.location.assign("/");
 };
 

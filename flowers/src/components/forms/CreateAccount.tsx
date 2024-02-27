@@ -5,6 +5,8 @@ import UserService from "../../services/UserService";
 import Button from "../Buttons/Button";
 import Input from "../UserData/Input";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { useDispatch } from "react-redux";
+import { closePopup } from "../../store/popup-slice";
 
 // interface FormData<T> {
 //   firstName: T;
@@ -35,10 +37,17 @@ const CreateAccount = () => {
     resolver: yupResolver(schema),
   });
 
+  const dispatch = useDispatch();
+
+  const closeModal = () => {
+    dispatch(closePopup());
+  };
+
   const onSubmit = async (data: FormData) => {
     try {
       await schema.validate(data);
       create(data);
+      closeModal();
     } catch (error) {
       console.error("Validation error:", error);
     }

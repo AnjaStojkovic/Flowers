@@ -2,7 +2,6 @@ import React, { ReactNode, useState } from "react";
 import logo from "../../assets/images/flowerLogo.svg";
 import { Link } from "../Link/Link";
 import Modal from "react-modal";
-// import Login from "../forms/Login";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../store/store";
 import { closePopup, openPopup } from "../../store/popup-slice";
@@ -69,6 +68,11 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
           route="/usersightings"
         />
         <Link
+          name="All sightings"
+          style="layoutContainer__rightSide__link"
+          route="/sightings"
+        />
+        <Link
           name="Favorites"
           style="layoutContainer__rightSide__link"
           route="/favorites"
@@ -84,6 +88,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
           <div className="layoutContainer__rightSide__login">
             <button
               onClick={openLoginPopup}
+
               className="layoutContainer__rightSide__link layoutContainer__rightSide__link--loginLink"
             >
               Login

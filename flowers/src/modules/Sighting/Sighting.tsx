@@ -2,7 +2,12 @@ import gradient from "../../assets/images/Gradient.png";
 import flower from "../../assets/images/flower.jpg";
 import com from "../../assets/images/com.svg";
 import heart from "../../assets/images/heart.svg";
+import fullHeart from "../../assets/images/full-heart.svg";
 import MapComponent from "../../components/Map";
+import SightingsService from "../../services/SightingsService";
+import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { deleteLike, postLike } from "../../store/like-slice";
 
 interface SightingProps {
   id?: number;
@@ -13,15 +18,41 @@ interface SightingProps {
   likes_count?: number;
   created_at?: Date;
   full_name?: string;
+  isLiked: boolean;
 }
 
 const Sighting: React.FC<SightingProps> = ({
+  id = 0,
   name,
   description,
   full_name,
   comments_count,
   likes_count,
+  isLiked,
 }) => {
+  const navigate = useNavigate();
+  const dispatch = useDispatch<any>();
+
+  const handleRemoveSighting = async (id: number) => {
+    try {
+      await SightingsService.deleteSighting(id);
+      alert("Sighting removed");
+      navigate("/sightings");
+    } catch (error) {
+      alert("An error occured while removing sighting");
+    }
+  };
+
+  const handleLikeSighting = () => {
+    dispatch(postLike(id));
+    window.location.reload();
+  };
+
+  const handleDeleteLike = () => {
+    dispatch(deleteLike(id));
+    window.location.reload();
+  };
+
   return (
     <>
       <div className="map">
@@ -49,10 +80,25 @@ const Sighting: React.FC<SightingProps> = ({
               <img className="reaction2__comment__icon" src={com} />
               <p>{comments_count} Comments</p>
             </div>
-            <div className="reaction2__heart">
-              <img className="reaction2__heart__icon" src={heart} />
+            <div
+              className="reaction2__heart"
+              onClick={isLiked ? handleDeleteLike : handleLikeSighting}
+            >
+              {isLiked ? (
+                <img className="reaction2__heart__icon" src={fullHeart} />
+              ) : (
+                <img className="reaction2__heart__icon" src={heart} />
+              )}
               <p>{likes_count} Favorites</p>
             </div>
+          </div>
+          <div className="delete-field">
+            <button
+              className="red-button"
+              onClick={() => handleRemoveSighting(id)}
+            >
+              Delete sighting
+            </button>
           </div>
         </div>
       </div>

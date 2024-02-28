@@ -61,6 +61,7 @@ const Comments: React.FC<CommentsProps> = ({
       .then(() => {
         alert("Successfully added");
         reset({ content: "" });
+        window.location.reload();
       })
       .catch((error: Error) => {
         alert(error.message);
@@ -90,7 +91,7 @@ const Comments: React.FC<CommentsProps> = ({
           />
         ))}
       <Input
-        type="text"
+        type="textarea"
         placeholder="Write a comment..."
         register={register("content")}
         className="input-box"

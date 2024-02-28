@@ -1,8 +1,8 @@
 import React from "react";
 
 interface InputProps {
-  type: "text" | "email" | "date" | "number" | "password" | "file";
-  register: any; // menjacu
+  type: "text" | "email" | "date" | "number" | "password" | "file" | "textarea";
+  register: any;
   className: "input-box" | "form-field" | "input-field" | "file-input";
   placeholder?: string;
   accept?: string;
@@ -17,16 +17,27 @@ const Input: React.FC<InputProps> = ({
   accept,
   defaultValue,
 }) => {
-  return (
-    <input
-      type={type}
-      {...register}
-      placeholder={placeholder}
-      className={className}
-      accept={accept}
-      defaultValue={defaultValue}
-    />
-  );
+  if (type === "textarea") {
+    return (
+      <textarea
+        {...register}
+        placeholder={placeholder}
+        className={className}
+        defaultValue={defaultValue}
+      />
+    );
+  } else {
+    return (
+      <input
+        type={type}
+        {...register}
+        placeholder={placeholder}
+        className={className}
+        accept={accept}
+        defaultValue={defaultValue}
+      />
+    );
+  }
 };
 
 export default Input;

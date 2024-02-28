@@ -75,13 +75,6 @@ const likeSlice = createSlice({
         ];
         console.log(action.payload);
       })
-      // .addCase(deleteLike.fulfilled, (state, action) => {
-      //   state.pending = "succeded";
-      //   state.likes = state.likes.filter(
-      //     (like) => like.id !== action.payload.id
-      //   );
-      // })
-
       .addCase(deleteLike.rejected, (state, action) => {
         state.pending = "failed";
         console.log("ERROR: ", action.payload);

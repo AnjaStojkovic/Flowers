@@ -1,0 +1,70 @@
+.detailsContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    background-image: url("../../../assets/images/bcg.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 400px;
+    padding-top: 180px;
+    padding-right: 130px;
+    padding-bottom: 50px;
+}
+
+.sightings-container {
+    display: flex;
+    align-items: center;
+    margin-left: 400px; 
+    margin-top: 30px; 
+}
+
+.star-circle {
+    width: 30px;
+    height: 30px;
+}
+
+.sightings-box {
+    margin-left: 10px;
+    color: white;
+    background-color: rgba(0, 0, 0, 0.127);
+    padding: 10px 8px 8px 8px;
+    border-radius: 5px;
+}
+
+.name {
+    height: 10px;
+    width: auto;
+    color: white;
+    text-align:left;
+    font-size: 34px;
+    font-weight: bold;
+    margin-left: 400px; 
+}
+
+.latinName {
+    height: 10px;
+    width: auto;
+    color: white;
+    text-align: left;
+    font-size: 20px;
+    font-weight: lighter;
+    margin-left: 400px; 
+}
+
+.add-sighting-container {
+    display: flex;
+    align-items: center;
+    margin-top: -30px;
+  }
+
+  .flower {
+    height:690px;
+    width: 350px;
+    position: relative;
+    top: -350px;
+  }
+
+
+
+
+

@@ -1,0 +1,35 @@
+.details-container {
+    display: flex;
+    padding-right: 150px;
+    padding-bottom: 40px;
+}
+
+.basic-info {
+    margin-top: 80px;
+    margin-left: 30px;
+    color: grey;
+    font-weight: bold;
+}
+
+.flower-description {
+    position: absolute;
+    color: gray;
+    top: 550px;
+    right: 500px;
+    left: 400px;
+}
+
+.details-line {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    top: 850px;
+    border-top: 1px solid rgba(128, 128, 128, 0.417); 
+    width: 98%;
+    margin-bottom: 90px;
+    margin-left: 20px;
+}
+
+.flower-sightings {
+    margin-top: 200px;
+}

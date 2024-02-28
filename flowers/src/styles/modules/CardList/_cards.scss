@@ -1,0 +1,142 @@
+.cardsList {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around; 
+    gap: 5px; 
+    margin-top: 220px;
+    width: 98%; 
+    margin: 0 auto;
+}
+
+.location-box {
+   display: flex;
+   align-items: center;
+   width: 90px;
+
+    &__location {
+        background-color: white;
+        border-radius: 20px;
+        color: orange;
+        position: absolute;
+        top: 0;
+        left: 0;
+        margin-top: 25px; 
+        margin-left: 20px;
+        padding: 5px 5px 5px 17px;
+        padding-right: 5px;
+        z-index: 1;
+    }
+    
+    &__location-svg {
+        height: 14px;
+        width: 14px;
+        position: absolute;
+        top: 0;
+        left: 0;
+        margin-top: 36px; 
+        margin-left: 20px;
+        margin-right: 20px;
+        z-index: 1;
+    }
+
+}
+
+.card-info {
+    display: flex;
+    flex-direction: column;
+    width: calc(25% - 20px); 
+    height: 510px;
+    margin-bottom: 20px;
+    position: relative;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+  
+
+.flower-img {
+    height: 340px;
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+
+.card-text {
+    width: 80%;
+    color: grey;
+    font-size: 15px;
+    margin-left: 15px;
+    margin-top: 15px;
+    text-align: justify;
+}
+
+.user-box2 {
+    display: flex;
+    gap: 15px;
+    padding-left: 15px;
+    margin-bottom: 10px;
+    
+
+    &__profile-pic {
+        height: 40px;
+        width: 40px;
+        border-radius: 50%; 
+    }
+
+    &__user {
+        text-align: left;
+        font-weight: 700;
+        font-size: 20px;
+
+        &__name {
+            font-weight: 400;
+            font-size: 16px;
+        }
+
+        &__username {
+            font-weight: 200;
+            font-size: 11px;
+            font-style: italic;
+        }
+    }
+
+} 
+
+.line {
+    border-top: 1px solid rgba(128, 128, 128, 0.417); 
+    width: 95%;
+    margin-top: 5px; 
+    margin-bottom: 17px;
+  }
+
+.reaction {
+    display: flex;
+    gap: 8px;
+    color: grey;
+    font-size: 14px;
+    justify-content: center;
+
+    &__comment {
+        display: flex;
+        margin-left: 9px;
+        gap: 10px;
+        margin-right: 20px;
+        
+        &__icon {
+            height: 18px;
+            width: 18px;
+            margin-top: 2px;
+        }
+    }
+
+    &__heart {
+        display: flex;
+        margin-left: 5px;
+        gap: 9px;
+
+        &__icon {
+            height: 18px;
+            width: 18px;
+            margin-top: 2px;
+        }
+    }
+}

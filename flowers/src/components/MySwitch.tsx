@@ -12,7 +12,23 @@ const MySwitch = () => {
     <FormControlLabel
       label="Turn notifications"
       className="settings__first__notifications--text"
-      control={<Switch checked={checked} onChange={handleChange} />}
+      control={
+        <Switch
+          checked={checked}
+          onChange={handleChange}
+          sx={{
+            "& .MuiSwitch-thumb": {
+              backgroundColor: "orange",
+              "&::after": {
+                borderColor: "orange",
+              },
+            },
+            "& .MuiSwitch-track": {
+              backgroundColor: checked ? "darkgray" : "lightgray",
+            },
+          }}
+        />
+      }
     />
   );
 };

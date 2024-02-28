@@ -1,7 +1,7 @@
 import React from "react";
 
 interface InputProps {
-  type: "text" | "email" | "date" | "email" | "password" | "file";
+  type: "text" | "email" | "date" | "number" | "password" | "file";
   register: any; // menjacu
   className: "input-box" | "form-field" | "input-field" | "file-input";
   placeholder?: string;

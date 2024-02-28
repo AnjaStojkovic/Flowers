@@ -8,13 +8,6 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { useDispatch } from "react-redux";
 import { closePopup } from "../../store/popup-slice";
 
-// interface FormData<T> {
-//   firstName: T;
-//   lastName: T;
-//   email: T;
-//   password: T;
-//   dateOfBirth: T;
-// }
 
 export interface FormData {
   first_name: string;

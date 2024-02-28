@@ -25,8 +25,12 @@ const Settings: React.FC = () => {
         <p className="settings__second--text">
           Select favorite flower sightings radious for notifications
         </p>
-        {/* <span className="settings__second--distance">1 5 10</span> */}
         <MySlider />
+        <div className="settings__second--km">
+          <p>1km</p>
+          <p>5km</p>
+          <p>10km</p>
+        </div>
       </div>
       <div className="settings__button">
         <button className="red-button">Save settings</button>

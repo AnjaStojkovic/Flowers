@@ -12,6 +12,7 @@ import UserSightingsList from "../modules/UserSightings/UserSightingsList";
 import { useSelector } from "react-redux";
 import { RootState } from "../store/store";
 import Settings from "../components/Settings";
+import EditSighting from "../components/Forms/EditSighting";
 
 const Navigation: React.FC = () => {
   const routes = createBrowserRouter([
@@ -47,6 +48,10 @@ const Navigation: React.FC = () => {
     {
       path: "/settings",
       element: <Settings />,
+    },
+    {
+      path: "/edit/:sightingId",
+      element: <EditSighting />,
     },
   ]);
 

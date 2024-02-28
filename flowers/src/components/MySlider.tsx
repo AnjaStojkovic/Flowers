@@ -8,6 +8,7 @@ const MySlider = () => {
     setValue(newValue as number);
   };
 
+
   return (
     <div>
       <Slider
@@ -19,7 +20,7 @@ const MySlider = () => {
         marks
         min={0}
         max={10}
-        style={{ color: "black" }} // Promena boje linije
+        style={{ color: "black" }}
         classes={{ thumb: "custom-thumb" }}
       />
     </div>

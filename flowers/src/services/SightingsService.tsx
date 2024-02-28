@@ -1,6 +1,7 @@
 import axios, { AxiosResponse } from "axios";
 import { getAuthToken } from "./Auth";
 import { MyFormData } from "../components/Forms/SightingForm";
+import { MyFormData as EditSigthingFormData } from "../components/Forms/EditSighting";
 
 const SightingsService = {
   getSightings: (page: number) => {
@@ -47,8 +48,27 @@ const SightingsService = {
       });
   },
 
-  deleteSighting: (id: any) => {
-    const url = `https://flowrspot-api.herokuapp.com/api/v1/sightings/${id}}`;
+  editSighting: (formData: EditSigthingFormData, id: number) => {
+    const url = `https://flowrspot-api.herokuapp.com//api/v1/sightings/${id}`;
+    const authToken = getAuthToken();
+    return axios
+      .put(url, formData, {
+        headers: {
+          Authorization: authToken,
+          "Content-Type": "application/json",
+        },
+      })
+      .then((res: AxiosResponse) => {
+        return res.data;
+      })
+      .catch((error: Error) => {
+        alert("An error occurred while editing the sighting");
+        throw error;
+      });
+  },
+
+  deleteSighting: (id: number) => {
+    const url = `https://flowrspot-api.herokuapp.com/api/v1/sightings/${id}`;
     const authToken = getAuthToken();
     return axios
       .delete(url, {

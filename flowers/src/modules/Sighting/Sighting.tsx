@@ -5,7 +5,7 @@ import heart from "../../assets/images/heart.svg";
 import fullHeart from "../../assets/images/full-heart.svg";
 import MapComponent from "../../components/Map";
 import SightingsService from "../../services/SightingsService";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { deleteLike, postLike } from "../../store/like-slice";
 
@@ -99,6 +99,9 @@ const Sighting: React.FC<SightingProps> = ({
             >
               Delete sighting
             </button>
+            <Link className="red-button" to={`/edit/${id}`}>
+              Edit sighting
+            </Link>
           </div>
         </div>
       </div>

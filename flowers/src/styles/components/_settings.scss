@@ -1,7 +1,7 @@
 .settings {
 
     padding: 30px 90px;
-    height: 500px;
+    height: 550px;
 
 
      display: flex;
@@ -40,6 +40,7 @@
 
     &__line {
          border-top: 1px solid rgba(128, 128, 128, 0.417); 
+
     }
 
     &__second {
@@ -55,13 +56,18 @@
         &--distance {
             margin-bottom: 30px;
         }
+
+         &--km {
+          display:  flex;
+          gap: 170px;
+         }
         
     }
 
     &__button {
        position: absolute;
-       right: 240px;
-       top: 470px
+       right: 260px;
+       top: 520px
     }
 }
 
@@ -69,9 +75,6 @@
   order: 2; 
 }
 
-// .orange-thumb {
-//   background-color: rgb(255, 89, 0) !important; 
-// }
 
 .custom-thumb {
   position: relative;
@@ -80,7 +83,7 @@
   border-radius: 50%;
   background-color: orange;
   border: 2px solid black;
-  margin-right: 10px; /* Dodajemo razmak između svakog kruga */
+  margin-right: 10px; 
 }
 
 .custom-thumb::after {

@@ -1,0 +1,116 @@
+.map {
+    position: relative;
+
+    &__gradient{
+        width: 100%;
+        height: 350px;
+    }
+
+    &__buttons{
+        position: absolute;
+        bottom: 40px;
+        right: 20px;
+        display: flex;
+        gap: 20px;
+        justify-content: flex-end;
+    }
+}
+
+.sighting-box {
+
+    display: flex;
+    padding-right: 133px;
+    margin: 30px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    
+    &__flower {
+        width: 270px;
+        height: 280px;
+        margin: 30px;
+    }
+}
+
+.left {
+
+    display: flex;
+    flex-direction: column;
+    margin-top: 60px;
+
+    &__user-box2 {
+        display: flex;
+        gap: 15px;
+        padding-left: 15px;
+        margin-bottom: 10px;
+        
+    
+        &__profile-pic {
+            height: 50px;
+            width: 50px;
+            border-radius: 50%; 
+        }
+    
+        &__user {
+            text-align: left;
+            font-weight: 700;
+            font-size: 20px;
+    
+            &--name {
+                font-weight: 100px;
+                font-size: 18px;
+            }
+    
+            &--username {
+                font-weight: 150;
+                font-size: 11px;
+                font-style: italic;
+            }
+        }
+        }
+
+        &__text {
+            margin-bottom: 20px;
+            margin-right: 35px;
+            color: grey;
+        }
+    
+}
+
+.reaction2 {
+    display: flex;
+    gap: 8px;
+    color: grey;
+    font-size: 14px;
+    justify-content: start;
+
+    &__comment {
+        display: flex;
+        margin-left: 9px;
+        gap: 10px;
+        margin-right: 20px;
+        
+        &__icon {
+            height: 18px;
+            width: 18px;
+            margin-top: 2px;
+        }
+    }
+
+    &__heart {
+        display: flex;
+        margin-left: 5px;
+        gap: 9px;
+
+        &__icon {
+            height: 18px;
+            width: 18px;
+            margin-top: 2px;
+        }
+    }
+}
+
+.delete-field {
+    display: flex;
+    margin-top: 30px;
+    gap: 10px;
+}
+

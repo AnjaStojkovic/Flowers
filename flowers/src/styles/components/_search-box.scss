@@ -1,0 +1,35 @@
+
+.searchBox {
+    display: flex;
+    align-items: center;
+    margin-top: 20px;
+    width: 470px;
+    background-color: white;
+    border-radius: 5px;
+}
+
+.searchBox input {
+    flex: 1;
+    padding: 10px;
+    border: none;
+    outline: none;
+}
+
+.searchButton,
+.startButton {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+.searchButton img {
+    width: 20px;
+    height: 20px;
+}
+
+.search-favorites {
+    display: flex;
+    justify-content: center;
+    margin-top: 50px;
+    margin-bottom: 70px;
+}

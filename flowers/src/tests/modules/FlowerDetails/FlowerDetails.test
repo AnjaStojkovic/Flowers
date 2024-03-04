@@ -1,0 +1,35 @@
+import React from "react";
+import { render, waitFor } from "@testing-library/react";
+// import Axios from "../../../axios/Axios";
+import axios from "axios";
+import FlowerDetails from "../../../modules/FlowerDetails/FlowerDetails";
+import FlowersService from "../../../services/FlowersService";
+import exp from "constants";
+
+jest.mock("axios");
+
+describe("FlowerDetails component", () => {
+  beforeEach(() => {
+    jest.clearAllMocks();
+  });
+
+  it("renders flower details correctly", async () => {
+
+    const data = {
+      id: 1,
+      name: "Rose",
+      latin_name: "Rosa",
+      sightings: 10,
+      profile_picture: "rose.jpg",
+      favorite: true,
+      features: ["red", "fragrant"],
+      description: "A beautiful flower with a lovely fragrance.",
+    };
+
+      (axios.get as jest.Mock).mockResolvedValueOnce(data);
+
+    const result = await FlowersService.getOneFlower(1);
+    expect(result).toEqual(data);
+
+  });
+});

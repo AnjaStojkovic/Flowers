@@ -3,8 +3,16 @@
     flex-direction: column;
     gap: 40px;
     background-image: url("../../../assets/images/flower-bg.png");
+    background-size: cover;
     background-repeat: no-repeat;
     height: 500px;
-    justify-content: center;
+
+    justify-content: flex-start;
     align-items: center;
+
+    &__search-box {
+        margin-top: -300px;
+        margin-bottom: 280px;
+    }
+
 }

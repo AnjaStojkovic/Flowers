@@ -1,0 +1,25 @@
+// import userReducer, { setUserId, clearUserId } from "../../store/user-slice";
+
+// describe("userReducer", () => {
+//   it("should set user id", () => {
+//     const initialState = {
+//       userId: null,
+//     };
+
+//     const action = { type: "user/setUserId", payload: 123 };
+
+//     const newState = userReducer(initialState, action);
+
+//     expect(newState.userId).toEqual(123);
+//   });
+
+//   it("should clear user id", () => {
+//     const initialState = {
+//       userId: 123,
+//     };
+
+//     const newState = userReducer(initialState, clearUserId());
+
+//     expect(newState.userId).toBeNull();
+//   });
+// });

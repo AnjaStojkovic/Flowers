@@ -1,8 +1,9 @@
 import { useForm } from "react-hook-form";
-import { useEffect, useId, useState } from "react";
 import Input from "../UserData/Input";
-import SightingsService from "../../services/SightingsService";
 import FlowersService from "../../services/FlowersService";
+import { useDispatch } from "react-redux";
+import { addSighting } from "../../store/sightings-slice";
+import { AppThunk } from "../../store/store";
 
 export interface MyFormData {
   name: string;
@@ -15,6 +16,7 @@ export interface MyFormData {
 
 const SightingForm: React.FC = () => {
   const { register, handleSubmit, reset } = useForm<MyFormData>();
+  const dispatch = useDispatch<any>();
 
   const fetchFlower = async (data: MyFormData) => {
     try {
@@ -31,7 +33,6 @@ const SightingForm: React.FC = () => {
 
   const onSubmit = async (data: MyFormData) => {
     const flower = await fetchFlower(data);
-
     const picture = data.picture[0];
 
     const formData = new FormData();
@@ -42,25 +43,19 @@ const SightingForm: React.FC = () => {
     formData.append("picture", picture);
     formData.append("flower_id", flower.id);
 
-    create(formData);
+    handleAddSighting(formData);
   };
 
-  const create = (formData: FormData) => {
-    SightingsService.postSighting(formData)
-      .then(() => {
-        alert("Successfully added");
-        reset({
-          name: "",
-          description: "",
-          latitude: "",
-          longitude: "",
-          picture: undefined,
-          flower_id: undefined,
-        });
-      })
-      .catch((error: Error) => {
-        alert(error.message);
-      });
+  const handleAddSighting = (formData: FormData) => {
+    dispatch(addSighting(formData));
+    reset({
+      name: "",
+      description: "",
+      latitude: "",
+      longitude: "",
+      picture: undefined,
+      flower_id: undefined,
+    });
   };
 
   return (
@@ -118,3 +113,6 @@ const SightingForm: React.FC = () => {
 };
 
 export default SightingForm;
+function dispatch(arg0: AppThunk) {
+  throw new Error("Function not implemented.");
+}

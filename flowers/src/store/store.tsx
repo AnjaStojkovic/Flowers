@@ -9,8 +9,16 @@ import storage from "redux-persist/lib/storage";
 import popupReducer from "./popup-slice";
 import userReducer from "./user-slice";
 import likeReducer from "./like-slice";
+import commentReducer from "./comments-slice";
+import sightingReducer from "./sightings-slice";
+import flowersReducer from "./flowers-slice";
 
-export type AppThunk = ThunkAction<void, RootState, null, Action<string>>;
+export type AppThunk<ReturnType = void> = ThunkAction<
+  ReturnType,
+  RootState,
+  unknown,
+  Action<string>
+>;
 
 const persistConfig = {
   key: "root",
@@ -21,17 +29,12 @@ const rootReducer = combineReducers({
   popup: popupReducer,
   user: userReducer,
   likes: likeReducer,
+  comments: commentReducer,
+  sightings: sightingReducer,
+  flowers: flowersReducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
-
-// export const store = configureStore({
-//   reducer: {
-//     popup: popupReducer,
-//     user: userReducer,
-//     likes: likeReducer,
-//   },
-// });
 
 export const store = configureStore({
   reducer: persistedReducer,

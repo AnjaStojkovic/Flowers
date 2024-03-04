@@ -2,54 +2,44 @@ import { useEffect, useState } from "react";
 import FlowersService from "../../services/FlowersService";
 import Card from "./Card";
 import Pagination from "../../components/Pagination";
-
-interface Flower {
-  latin_name: string;
-  id: number;
-  name: string;
-  sightings: number;
-  profile_picture: string;
-}
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "../../store/store";
+import {
+  fetchFlowers,
+  getSearchedFlowers,
+  setCurrentPage,
+} from "../../store/flowers-slice";
 
 interface FlowersListProps {
   searchParams: { name: string };
 }
 
 const FlowersList: React.FC<FlowersListProps> = ({ searchParams }) => {
-  const [flowersData, setFlowersData] = useState<Flower[]>([]);
-  const [currentPage, setCurrentPage] = useState(0);
-  const [totalPages, setTotalPages] = useState(0);
+  const dispatch = useDispatch<any>();
+  const { flowers, loading, error, totalPages, currentPage } = useSelector(
+    (state: RootState) => state.flowers
+  );
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        let response;
-        if (searchParams.name !== "") {
-          response = await FlowersService.getSearchedFlowers(searchParams.name);
-        } else {
-          response = await FlowersService.getFlowers(currentPage);
-        }
-        setFlowersData(response.flowers);
-        setCurrentPage(response.meta.pagination.current_page);
-        setTotalPages(response.meta.pagination.total_pages);
-      } catch (error) {
-        console.error("An error occurred while fetching flowers:", error);
-        setFlowersData([]);
-      }
-    };
-
-    fetchData();
-  }, [searchParams, currentPage]);
+    if (searchParams.name !== "") {
+      dispatch(getSearchedFlowers(searchParams.name));
+    } else {
+      dispatch(fetchFlowers(currentPage));
+    }
+  }, [dispatch, currentPage, searchParams]);
 
   const handlePageChange = (page: number) => {
-    setCurrentPage(page);
+    dispatch(setCurrentPage(page));
   };
 
   return (
     <>
+      {loading && <p>Loading...</p>}
+      {error && <p>Error: {error}</p>}
       <div className="imagesList">
-        {flowersData.map((flower) => (
+        {flowers.map((flower) => (
           <Card
+            key={flower.id}
             id={flower.id}
             name={flower.name}
             description={flower.latin_name}

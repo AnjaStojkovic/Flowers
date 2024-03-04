@@ -1,0 +1,28 @@
+// import { fireEvent, render, screen } from "@testing-library/react";
+// import UserInfo from "../../../components/UserData/UserInfo";
+
+// describe("UserInfo component", () => {
+//   test("displays user info correctly", async () => {
+//     render(<UserInfo />);
+
+//     expect(screen.getByText(/First name/i)).toBeInTheDocument();
+//     expect(screen.getByText(/Last name/i)).toBeInTheDocument();
+//     expect(screen.getByText(/Logout/i)).toBeInTheDocument();
+//   });
+
+//   test("clicking logout button triggers logout action", () => {
+//     const mockLogout = jest.fn();
+//     const mockClosePopup = jest.fn();
+
+//     jest.mock("../../store/popup-slice", () => ({
+//       closePopup: mockClosePopup,
+//     }));
+
+//     render(<UserInfo />);
+
+//     fireEvent.click(screen.getByText(/Logout/i));
+
+//     expect(mockLogout).toHaveBeenCalled();
+//     expect(mockClosePopup).toHaveBeenCalled();
+//   });
+// });

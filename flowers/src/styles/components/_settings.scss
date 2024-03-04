@@ -1,11 +1,9 @@
 .settings {
-
     padding: 30px 90px;
     height: 550px;
 
-
-     display: flex;
-        flex-direction: column;
+    display: flex;
+    flex-direction: column;
 
     &__first {
 
@@ -67,7 +65,7 @@
     &__button {
        position: absolute;
        right: 260px;
-       top: 520px
+       top: 520px;
     }
 }
 

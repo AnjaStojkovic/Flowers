@@ -8,7 +8,6 @@ const MySlider = () => {
     setValue(newValue as number);
   };
 
-
   return (
     <div>
       <Slider

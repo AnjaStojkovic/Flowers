@@ -8,6 +8,7 @@ import SightingsService from "../../services/SightingsService";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { deleteLike, postLike } from "../../store/like-slice";
+import { deleteSighting } from "../../store/sightings-slice";
 
 interface SightingProps {
   id?: number;
@@ -30,17 +31,12 @@ const Sighting: React.FC<SightingProps> = ({
   likes_count,
   isLiked,
 }) => {
-  const navigate = useNavigate();
   const dispatch = useDispatch<any>();
+  const navigate = useNavigate();
 
-  const handleRemoveSighting = async (id: number) => {
-    try {
-      await SightingsService.deleteSighting(id);
-      alert("Sighting removed");
-      navigate("/sightings");
-    } catch (error) {
-      alert("An error occured while removing sighting");
-    }
+  const handleRemoveSighting = (id: number) => {
+    dispatch(deleteSighting(id));
+    navigate("/sightings");
   };
 
   const handleLikeSighting = () => {

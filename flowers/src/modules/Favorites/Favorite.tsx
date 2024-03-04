@@ -1,5 +1,6 @@
+import { useDispatch } from "react-redux";
 import StarIcon from "../../components/Svgs/Star-Icon";
-import FlowersService from "../../services/FlowersService";
+import { deleteFavoriteFlower } from "../../store/flowers-slice";
 
 interface FavoriteProps {
   id: number;
@@ -30,7 +31,11 @@ const Favorite: React.FC<FavoriteProps> = ({
       style={{ backgroundImage: `url(${profilePicture})` }}
     >
       <div>
-        <StarIcon className="card2__icon" onClick={handleRemoveClick} />
+        <StarIcon
+          className="card2__icon"
+          onClick={handleRemoveClick}
+          data-testid="remove-icon"
+        />
         <h1 className="card2__heading">{name}</h1>
         <p className="card2__description">{latinName}</p>
         <p className="card2__sightings">Sightings: {sightings}</p>

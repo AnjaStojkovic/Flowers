@@ -1,6 +1,8 @@
 import { Link } from "react-router-dom";
 import StarIcon from "../../components/Svgs/Star-Icon";
 import FlowersService from "../../services/FlowersService";
+import { useDispatch } from "react-redux";
+import { addFavoriteFlower } from "../../store/flowers-slice";
 
 interface CardProps {
   id: number;
@@ -17,10 +19,11 @@ const Card: React.FC<CardProps> = ({
   sightings,
   imageUrl,
 }) => {
-  const handleFavoriteClick = async () => {
+  const dispatch = useDispatch<any>();
+
+  const handleFavoriteClick = () => {
     try {
-      await FlowersService.postFavoriteFlower(id);
-      alert("Flower added to favorites");
+      dispatch(addFavoriteFlower(id));
     } catch (error) {
       alert("An error occured while adding flower to favorites");
     }

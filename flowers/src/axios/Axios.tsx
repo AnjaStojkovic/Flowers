@@ -1,9 +1,6 @@
-import axios from "axios";
+import axios, { AxiosInstance } from "axios";
 import { logout } from "../services/Auth";
-import * as jwt_decode from "jwt-decode";
 import { jwtDecode } from "jwt-decode";
-import { useDispatch } from "react-redux";
-import { closePopup } from "../store/popup-slice";
 
 var Axios = axios.create({
   baseURL: "https://flowrspot-api.herokuapp.com",

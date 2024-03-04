@@ -3,7 +3,6 @@ import location from "../assets/images/location.svg";
 import com from "../assets/images/com.svg";
 import heart from "../assets/images/heart.svg";
 import { Link, useNavigate } from "react-router-dom";
-import SightingsService from "../services/SightingsService";
 
 interface User {
   id: number;

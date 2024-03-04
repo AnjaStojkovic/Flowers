@@ -1,5 +1,4 @@
 import React from "react";
-import styles from "./Navigation.module.scss";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Homepage from "../modules/HomePage/Homepage";
 import NotFound from "../modules/NotFound";
@@ -9,8 +8,6 @@ import SightingPage from "../modules/Sighting/SightingPage";
 import AddSighting from "../modules/AddSighting/AddSighting";
 import SightingListPage from "../modules/SightingList/SightingListPage";
 import UserSightingsList from "../modules/UserSightings/UserSightingsList";
-import { useSelector } from "react-redux";
-import { RootState } from "../store/store";
 import Settings from "../components/Settings";
 import EditSighting from "../components/Forms/EditSighting";
 

@@ -4,18 +4,18 @@ import CommentsService from "../../services/CommentsService";
 import Input from "../../components/UserData/Input";
 import { useForm } from "react-hook-form";
 import Pagination from "../../components/Pagination";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "../../store/store";
+import {
+  addComment,
+  fetchComments,
+  setCurrentPage,
+} from "../../store/comments-slice";
 
 interface CommentsProps {
   created_at: Date;
   comments_count?: number;
   sightingId: number;
-}
-
-interface Comment {
-  id: number;
-  user_full_name: string;
-  sightings: number;
-  content: string;
 }
 
 export interface FormData {
@@ -27,49 +27,33 @@ const Comments: React.FC<CommentsProps> = ({
   comments_count,
   sightingId,
 }) => {
-  const [comments, setComments] = useState<Comment[]>([]);
-  const [currentPage, setCurrentPage] = useState(0);
-  const [totalPages, setTotalPages] = useState(0);
   const { register, handleSubmit, reset } = useForm<FormData>();
 
-  const getCommentsData = async (sightingId: any) => {
+  const dispatch = useDispatch<any>();
+  const { comments, loading, error, totalPages, currentPage } = useSelector(
+    (state: RootState) => state.comments
+  );
+  useEffect(() => {
+    dispatch(fetchComments(currentPage, sightingId));
+  }, [dispatch, currentPage, sightingId]);
+
+  const handleAddComment = (formData: FormData) => {
+    dispatch(addComment(formData, sightingId));
+  };
+
+  const onSubmit = (data: FormData) => {
     try {
-      const response = await CommentsService.getComments(
-        currentPage,
-        sightingId
-      );
-      const { comments } = response;
-      setComments(comments);
-      setCurrentPage(response.meta.pagination.current_page);
-      setTotalPages(response.meta.pagination.total_pages);
-    } catch (error) {
-      console.error("An error occurred while fetching comments:", error);
-      setComments([]);
+      handleAddComment(data);
+      alert("Successfully added");
+      reset({ content: "" });
+      window.location.reload();
+    } catch (error: any) {
+      alert(error.message);
     }
   };
 
-  useEffect(() => {
-    getCommentsData(sightingId);
-  }, [currentPage]);
-
-  const onSubmit = async (data: FormData) => {
-    create(data);
-  };
-
-  const create = (formData: FormData) => {
-    CommentsService.postComment(formData, sightingId)
-      .then(() => {
-        alert("Successfully added");
-        reset({ content: "" });
-        window.location.reload();
-      })
-      .catch((error: Error) => {
-        alert(error.message);
-      });
-  };
-
   const handlePageChange = (page: number) => {
-    setCurrentPage(page);
+    dispatch(setCurrentPage(page));
   };
 
   return (
@@ -79,17 +63,22 @@ const Comments: React.FC<CommentsProps> = ({
         <p className="comments__heading--number">{comments_count} comments</p>
         <button className="white-button">Add comment</button>
       </div>
-      {comments &&
+      {loading && <p>Loading comments...</p>}
+      {error && <p>Error: {error}</p>}
+      {comments && comments.length > 0 ? (
         comments.map((comment) => (
           <OneComment
+            key={comment.id}
             id={comment.id}
             name={comment.user_full_name}
-            sightings={comment.sightings}
             content={comment.content}
             created_at={created_at}
             sightingId={sightingId}
           />
-        ))}
+        ))
+      ) : (
+        <p>No comments</p>
+      )}
       <Input
         type="textarea"
         placeholder="Write a comment..."

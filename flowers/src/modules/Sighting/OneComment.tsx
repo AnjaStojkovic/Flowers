@@ -2,14 +2,14 @@ import dayjs from "dayjs";
 import flower from "../../assets/images/flower.jpg";
 import relativeTime from "dayjs/plugin/relativeTime";
 import CommentsService from "../../services/CommentsService";
-import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { deleteComment } from "../../store/comments-slice";
 
 dayjs.extend(relativeTime);
 
 interface CommentProps {
   id: number;
   name: string;
-  sightings: number;
   content: string;
   created_at: Date;
   sightingId: number;
@@ -18,20 +18,15 @@ interface CommentProps {
 const OneComment: React.FC<CommentProps> = ({
   id,
   name,
-  sightings,
   content,
   created_at,
   sightingId,
 }) => {
   const formattedTimeAgo = dayjs(created_at).fromNow();
-  const handleRemoveComment = async (sightingId: number, id: number) => {
-    try {
-      await CommentsService.deleteComment(sightingId, id);
-      alert("Comment removed");
-      window.location.reload();
-    } catch (error) {
-      alert("An error occured while removing comment");
-    }
+  const dispatch = useDispatch<any>();
+
+  const handleDeleteComment = (sightingId: number, id: number) => {
+    dispatch(deleteComment(sightingId, id));
   };
 
   return (
@@ -47,7 +42,7 @@ const OneComment: React.FC<CommentProps> = ({
       <div className="delete-comment">
         <button
           className="red-button"
-          onClick={() => handleRemoveComment(sightingId, id)}
+          onClick={() => handleDeleteComment(sightingId, id)}
         >
           Delete comment
         </button>

@@ -4,24 +4,9 @@ import { useParams } from "react-router-dom";
 import SightingsService from "../../services/SightingsService";
 import Sighting from "./Sighting";
 import LikesService from "../../services/LikesService";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../store/store";
-
-interface User {
-  id: number;
-  full_name: string;
-}
-
-interface Sighting {
-  id: number;
-  name: string;
-  description: string;
-  picture: string;
-  comments_count?: number;
-  likes_count: number;
-  user?: User;
-  created_at: Date;
-}
+import { fetchOneSighting } from "../../store/sightings-slice";
 
 interface Likes {
   id: number;
@@ -31,19 +16,18 @@ interface Likes {
 }
 
 const SightingPage = () => {
-  const [sightingData, setSightingData] = useState<Sighting>();
   const [likes, setLikes] = useState<Likes[]>([]);
   const { sightingId } = useParams();
-  const { userId } = useSelector((state: RootState) => state?.user);
+  const { userId } = useSelector((state: RootState) => state?.user.user);
 
-  const getSightingData = async (sightingId: any) => {
-    try {
-      const { sighting } = await SightingsService.getOneSighting(sightingId);
-      setSightingData(sighting);
-    } catch (error) {
-      console.error("An error occurred while fetching the sighting:", error);
-    }
-  };
+  const dispatch = useDispatch<any>();
+  const { currentSighting } = useSelector(
+    (state: any) => state?.sightings
+  );
+
+  useEffect(() => {
+    dispatch(fetchOneSighting(Number(sightingId)));
+  }, [dispatch]);
 
   const getLikes = async (sightingId: any) => {
     try {
@@ -62,28 +46,27 @@ const SightingPage = () => {
   };
 
   useEffect(() => {
-    getSightingData(sightingId);
     getLikes(sightingId);
   }, [sightingId]);
 
   return (
     <>
       <Sighting
-        id={sightingData?.id}
-        name={sightingData?.name}
-        full_name={sightingData?.user?.full_name}
-        description={sightingData?.description}
-        comments_count={sightingData?.comments_count}
-        likes_count={sightingData?.likes_count}
-        picture={sightingData?.picture}
-        created_at={sightingData?.created_at}
+        id={currentSighting?.id}
+        name={currentSighting?.name}
+        full_name={currentSighting?.user?.full_name}
+        description={currentSighting?.description}
+        comments_count={currentSighting?.comments_count}
+        likes_count={currentSighting?.likes_count}
+        picture={currentSighting?.picture}
+        created_at={currentSighting?.created_at}
         isLiked={isSigthingLiked()}
       />
-      {sightingData?.created_at && (
+      {currentSighting?.created_at && (
         <Comments
-          created_at={sightingData?.created_at}
-          comments_count={sightingData?.comments_count}
-          sightingId={sightingData.id}
+          created_at={currentSighting?.created_at}
+          comments_count={currentSighting?.comments_count}
+          sightingId={currentSighting.id}
         />
       )}
     </>

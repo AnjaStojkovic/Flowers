@@ -73,7 +73,6 @@ const likeSlice = createSlice({
           ...state.likes,
           { id: action?.payload?.like?.id, liked: false },
         ];
-        console.log(action.payload);
       })
       .addCase(deleteLike.rejected, (state, action) => {
         state.pending = "failed";

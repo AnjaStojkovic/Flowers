@@ -7,7 +7,7 @@ import Input from "../UserData/Input";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useDispatch } from "react-redux";
 import { closePopup } from "../../store/popup-slice";
-
+import { addUser } from "../../store/user-slice";
 
 export interface FormData {
   first_name: string;
@@ -26,34 +26,30 @@ const schema = yup.object().shape({
 });
 
 const CreateAccount = () => {
-  const { register, handleSubmit } = useForm<FormData>({
+  const { register, handleSubmit, reset } = useForm<FormData>({
     resolver: yupResolver(schema),
   });
 
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<any>();
 
   const closeModal = () => {
     dispatch(closePopup());
   };
 
   const onSubmit = async (data: FormData) => {
-    try {
-      await schema.validate(data);
-      create(data);
-      closeModal();
-    } catch (error) {
-      console.error("Validation error:", error);
-    }
+    handleAddUser(data);
   };
 
-  const create = (formData: FormData) => {
-    UserService.createAccount(formData)
-      .then(() => {
-        alert("Successfully added");
-      })
-      .catch((error: Error) => {
-        alert(error.message);
-      });
+  const handleAddUser = (formData: FormData) => {
+    dispatch(addUser(formData));
+    reset({
+      first_name: "",
+      last_name: "",
+      email: "",
+      password: "",
+      date_of_birth: undefined,
+    });
+    closeModal();
   };
 
   return (

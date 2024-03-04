@@ -67,6 +67,7 @@ const UserSightingsList: React.FC = () => {
         {sightingsData.map((sighting) => {
           return (
             <CardInfo
+              key={sighting.id}
               id={sighting.id}
               name={sighting.name}
               description={sighting.description}

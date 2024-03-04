@@ -1,52 +1,41 @@
 import React, { useEffect, useState } from "react";
 import BackgroundDetails from "./BackgroundDetails";
 import FlowerInfo from "./FlowerInfo";
-import FlowersService from "../../services/FlowersService";
 import { useParams } from "react-router-dom";
-import FloweSightings from "../FlowerDetails/FlowerSightings";
 import FlowerSightings from "../FlowerDetails/FlowerSightings";
-
-interface Flower {
-  id: number;
-  name: string;
-  latin_name: string;
-  sightings: number;
-  profile_picture: string;
-  favorite: boolean;
-  features: string[];
-  description: string;
-}
+import { useDispatch, useSelector } from "react-redux";
+import { fetchOneFlower } from "../../store/flowers-slice";
 
 const FlowerDetails: React.FC = () => {
-  const [flowerData, setFlowerData] = useState<Flower>();
   const { flowerId } = useParams();
-
-  const getFlowerData = async (flowerId: any) => {
-    try {
-      const { flower } = await FlowersService.getOneFlower(flowerId);
-      setFlowerData(flower);
-    } catch (error) {
-      console.error("An error occurred while fetching the flower:", error);
-    }
-  };
+  const dispatch = useDispatch<any>();
+  const { currentFlower, loading, error } = useSelector(
+    (state: any) => state?.flowers
+  );
 
   useEffect(() => {
-    getFlowerData(flowerId);
-  }, []);
+    dispatch(fetchOneFlower(Number(flowerId)));
+  }, [dispatch]);
+
+  const flower = currentFlower;
+
+  console.log(currentFlower);
 
   return (
     <>
-      {flowerData && (
+      {loading && <p>Loading...</p>}
+      {error && <p>Error: {error}</p>}
+      {currentFlower && (
         <>
           <BackgroundDetails
-            name={flowerData.name}
-            latin_name={flowerData.latin_name}
-            sightings={flowerData.sightings}
+            name={currentFlower.name}
+            latin_name={currentFlower.latin_name}
+            sightings={currentFlower.sightings}
           />
-          <FlowerInfo description={flowerData.description} />
+          <FlowerInfo description={currentFlower.description} />
           <hr className="details-line" />
           <div className="flower-sightings">
-            <FlowerSightings flowerId={flowerData.id} />
+            <FlowerSightings flowerId={currentFlower.id} />
           </div>
         </>
       )}
